@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="32dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/google_icon" />
+
+    <ru.freeit.walkingtogether.presentation.view.SelfTextView
+        app:startString=""
+        app:endString="Войдите через Google аккаунт"
+        android:textSize="28sp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:text="@string/login"
+        android:drawableEnd="@drawable/ic_login_24"
+        android:drawableTint="@color/white"
+        android:paddingStart="32dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

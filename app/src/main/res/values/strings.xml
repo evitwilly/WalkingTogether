@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WalkingTogether</string>
+    <string name="login">войти</string>
+    <string name="male">Мужской</string>
+    <string name="female">Женский</string>
+    <string name="register">зарегаться</string>
+    <string name="missing_internet">Нет доступа к интернету. Пожалуйста подключитесь к нему</string>
+    <string name="bio">о себе</string>
+    <string name="name">имя</string>
+</resources>
