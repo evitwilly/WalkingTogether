@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.presentation.screens.register
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,7 +26,8 @@ class AvatarAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AvatarViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        AvatarViewHolder.from(parent)
     override fun onBindViewHolder(holder: AvatarViewHolder, position: Int) = holder.bind(avatars[position], listener)
     override fun getItemCount() = avatars.size
 }

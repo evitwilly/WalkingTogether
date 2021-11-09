@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.core
 
 import android.app.Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn

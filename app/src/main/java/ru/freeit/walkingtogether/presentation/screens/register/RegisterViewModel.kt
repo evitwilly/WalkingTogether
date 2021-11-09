@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.presentation.screens.register
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.freeit.walkingtogether.core.CoroutineViewModel
+import ru.freeit.walkingtogether.presentation.screens.auth.FirebaseUser
+import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+
 
 class RegisterViewModel(
     private val id: String,

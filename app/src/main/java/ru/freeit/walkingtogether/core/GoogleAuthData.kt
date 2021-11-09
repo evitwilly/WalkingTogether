@@ -1,9 +1,9 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.core
 
 import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
-class GoogleUserData(ctx: Context) {
+class GoogleAuthData(ctx: Context) {
     private val account = GoogleSignIn.getLastSignedInAccount(ctx)
 
     fun isLogin() = account != null

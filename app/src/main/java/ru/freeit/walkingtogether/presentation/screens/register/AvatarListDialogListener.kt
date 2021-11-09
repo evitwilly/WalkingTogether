@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.presentation.screens.register
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager

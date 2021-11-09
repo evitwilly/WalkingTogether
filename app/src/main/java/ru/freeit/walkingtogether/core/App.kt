@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.google.firebase.FirebaseApp
-import ru.freeit.walkingtogether.presentation.screens.auth.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 
 class App : Application() {
 

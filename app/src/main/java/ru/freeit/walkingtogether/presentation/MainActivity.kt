@@ -3,8 +3,7 @@ package ru.freeit.walkingtogether.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.freeit.walkingtogether.R
-import ru.freeit.walkingtogether.presentation.screens.auth.IntroScreen
-import ru.freeit.walkingtogether.presentation.screens.auth.RegisterScreen
+import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
