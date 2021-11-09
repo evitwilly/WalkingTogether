@@ -8,6 +8,9 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import ru.freeit.walkingtogether.R
+import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
 
 class RegisterScreen : Fragment() {
@@ -24,7 +27,11 @@ class RegisterScreen : Fragment() {
         val binding = RegisterScreenBinding.inflate(inflater)
 
         val id = requireArguments().getString(googleAccountIdKey) ?: throw IllegalStateException("google id is empty!")
-        val viewModel = ViewModelProvider(this, RegisterViewModelFactory(id, this, savedInstanceState)).get(RegisterViewModel::class.java)
+
+        val app = requireActivity().application as App
+        val viewModelFactory = app.viewModelFactories.register(id, this, savedInstanceState)
+
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(RegisterViewModel::class.java)
 
         binding.avatarImage.setOnClickListener {
             AvatarListDialog.newInstance(binding.femaleCheckbox.isChecked)
@@ -40,13 +47,32 @@ class RegisterScreen : Fragment() {
         binding.maleCheckbox.setOnClickListener {
             binding.maleCheckbox.runIfChecked { viewModel.checkMale() }
         }
+
         binding.registerButton.setOnClickListener {
-            viewModel.register(binding.femaleCheckbox.isChecked, binding.nameEdit.text.toString(), binding.bioEdit.text.toString())
+            viewModel.register(binding.femaleCheckbox.isChecked, binding.nameEdit.text.toString(),
+                binding.bioEdit.text.toString())
         }
 
         viewModel.init()
 
-
+        viewModel.observeRegisterState(viewLifecycleOwner) { registerState ->
+            when (registerState) {
+                RegisterState.NameEmpty -> {
+                    binding.nameBox.error = getString(R.string.name_is_emtpy)
+                }
+                RegisterState.BioEmpty -> {
+                    binding.bioBox.error = getString(R.string.bio_is_empty)
+                }
+                RegisterState.Success -> {
+                    Snackbar.make(binding.root, "OK!", Snackbar.LENGTH_SHORT).show()
+                }
+                RegisterState.Failure -> {
+                    Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            viewModel.resetRegisterState()
+        }
 
         return binding.root
     }

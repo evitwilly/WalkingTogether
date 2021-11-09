@@ -8,16 +8,22 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class FirebaseDatabase {
+class MyFirebaseDatabase {
 
     private val databaseUrl = "https://walkingtogether-c014d-default-rtdb.europe-west1.firebasedatabase.app/"
     private val database = FirebaseDatabase.getInstance(databaseUrl)
 
     private val users = "users"
 
-    fun add(user: FirebaseUser) = database.getReference(users)
-        .child(user.id())
-        .setValue(user.encode())
+    suspend fun add(user: FirebaseUser) = suspendCoroutine<Unit> { continuation ->
+        database.getReference(users)
+            .child(user.id())
+            .setValue(user.encode())
+            .addOnSuccessListener {
+                continuation.resume(Unit)
+            }
+            .addOnFailureListener(continuation::resumeWithException)
+    }
 
     suspend fun user(id: String) : FirebaseUser = suspendCoroutine { continuation ->
         database.getReference(users).child(id).addValueEventListener(object : ValueEventListener {

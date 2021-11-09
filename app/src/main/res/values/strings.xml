@@ -7,4 +7,6 @@
     <string name="missing_internet">Нет доступа к интернету. Пожалуйста подключитесь к нему</string>
     <string name="bio">о себе</string>
     <string name="name">имя</string>
+    <string name="name_is_emtpy">ваше имя пустое</string>
+    <string name="bio_is_empty">напишите хоть что-нибудь</string>
 </resources>
