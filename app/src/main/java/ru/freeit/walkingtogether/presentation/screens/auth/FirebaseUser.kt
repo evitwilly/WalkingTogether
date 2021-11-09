@@ -21,10 +21,10 @@ data class FirebaseUser(
     )
 
     companion object {
-        private const val nameKey = "nameKey"
-        private const val bioKey = "bioKey"
-        private const val isFemaleKey = "isFemaleKey"
-        private const val drawableIdKey = "isDrawableIdKey"
+        private const val nameKey = "name"
+        private const val bioKey = "bio"
+        private const val isFemaleKey = "isFemale"
+        private const val drawableIdKey = "avatarId"
 
         fun empty() = FirebaseUser("")
 

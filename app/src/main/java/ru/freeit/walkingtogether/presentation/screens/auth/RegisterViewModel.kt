@@ -1,27 +1,13 @@
 package ru.freeit.walkingtogether.presentation.screens.auth
 
-import android.os.Bundle
-import androidx.lifecycle.*
-import androidx.savedstate.SavedStateRegistryOwner
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.freeit.walkingtogether.core.CoroutineViewModel
-
-class RegisterViewModelFactory(
-    private val id: String,
-    private val database: MyFirebaseDatabase,
-    owner: SavedStateRegistryOwner,
-    bundle: Bundle?
-) : AbstractSavedStateViewModelFactory(owner, bundle) {
-    override fun <T : ViewModel?> create(key: String, modelClass: Class<T>, handle: SavedStateHandle) =
-        RegisterViewModel(id, handle, database) as T
-}
-
-sealed class RegisterState {
-    object NameEmpty : RegisterState()
-    object BioEmpty : RegisterState()
-    object Success : RegisterState()
-    object Failure : RegisterState()
-}
 
 class RegisterViewModel(
     private val id: String,
@@ -29,28 +15,28 @@ class RegisterViewModel(
     private val database: MyFirebaseDatabase
 ) : CoroutineViewModel() {
 
+    private val avatarIdKey = "avatar_id"
+
     private val images = AvatarImages()
     private val registerState = MutableLiveData<RegisterState>()
-    private val checkedAvatar = MutableLiveData<Int>()
+    private val checkedAvatar = MutableLiveData<AvatarImage>()
 
     fun init() {
-        val checkedAvatar = savedState.get<Int>("checked_avatar") ?: -1
-        if (checkedAvatar != -1) {
-            this.checkedAvatar.value = checkedAvatar
+        val avatarId = savedState.get<Int>(avatarIdKey) ?: -1
+        if (avatarId != -1) {
+            this.checkedAvatar.value = images.drawableBy(avatarId)
         } else {
-            this.checkedAvatar.value = images.randomFemale()
+            selectAvatar(images.randomFemale().id())
         }
     }
 
-    fun observeAvatar(lifecycleOwner: LifecycleOwner, observer: Observer<Int>) = checkedAvatar.observe(lifecycleOwner, observer)
+    fun observeAvatar(lifecycleOwner: LifecycleOwner, observer: Observer<AvatarImage>) = checkedAvatar.observe(lifecycleOwner, observer)
     fun observeRegisterState(lifecycleOwner: LifecycleOwner, observer: Observer<RegisterState>) = registerState.observe(lifecycleOwner, observer)
 
-    fun resetRegisterState() { registerState.value = null }
+    private fun saveCheckedAvatar() { savedState[avatarIdKey] = checkedAvatar.value?.id() ?: -1 }
 
-    private fun saveCheckedAvatar() { savedState["checked_avatar"] = checkedAvatar.value ?: -1 }
-
-    fun selectAvatar(drawableId: Int) {
-        checkedAvatar.value = drawableId
+    fun selectAvatar(id: Int) {
+        checkedAvatar.value = images.drawableBy(id)
         saveCheckedAvatar()
     }
 
@@ -76,10 +62,14 @@ class RegisterViewModel(
             return
         }
 
-        val avatarResourceId = checkedAvatar.value!!
+        val avatar = checkedAvatar.value!!
+
         viewModelScope.launch {
             try {
-                database.add(FirebaseUser(id, name, bio, isFemale, avatarResourceId))
+                registerState.value = RegisterState.Loading
+                withContext(Dispatchers.IO) {
+                    database.add(FirebaseUser(id, name, bio, isFemale, avatar.id()))
+                }
                 registerState.value = RegisterState.Success
             } catch (exc: Exception) {
                 registerState.value = RegisterState.Failure

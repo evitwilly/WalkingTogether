@@ -17,8 +17,10 @@ class AvatarListDialog : DialogFragment() {
     }
 
     companion object {
+        private const val isFemaleKey = "is_female_key"
+
         fun newInstance(isFemale: Boolean) = AvatarListDialog().apply {
-            arguments = bundleOf("is_female_key" to isFemale)
+            arguments = bundleOf(isFemaleKey to isFemale)
         }
     }
 
@@ -29,13 +31,13 @@ class AvatarListDialog : DialogFragment() {
     ): View {
         val binding = AvatarListDialogBinding.inflate(inflater)
 
-        val images = if (requireArguments().getBoolean("is_female_key", true))
-            AvatarImages().femaleImages()
+        val images = if (requireArguments().getBoolean(isFemaleKey, true))
+            AvatarImages().female()
         else
-            AvatarImages().maleImages()
+            AvatarImages().male()
 
-        binding.avatarList.adapter = AvatarAdapter({ drawableId ->
-            AvatarListDialogListener(parentFragmentManager).setResult(drawableId)
+        binding.avatarList.adapter = AvatarAdapter({ avatar ->
+            AvatarListDialogListener(parentFragmentManager).setResult(avatar.id())
             dismiss()
         }, images)
 

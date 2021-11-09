@@ -6,9 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 class GoogleUserData(ctx: Context) {
     private val account = GoogleSignIn.getLastSignedInAccount(ctx)
 
-    fun isLogin() : Boolean {
-        return account != null
-    }
+    fun isLogin() = account != null
 
     fun id() = account.id ?: ""
     fun displayName() = account.displayName

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -39,7 +40,34 @@ class RegisterScreen : Fragment() {
         }
 
         AvatarListDialogListener(parentFragmentManager).listen(viewLifecycleOwner, viewModel::selectAvatar)
-        viewModel.observeAvatar(viewLifecycleOwner, binding.avatarImage::setImageResource)
+
+        viewModel.observeAvatar(viewLifecycleOwner) { avatarImage ->
+            binding.avatarImage.setImageResource(avatarImage.drawable())
+        }
+
+        viewModel.observeRegisterState(viewLifecycleOwner) { registerState ->
+            binding.nameBox.error = null
+            binding.bioBox.error = null
+            binding.progress.isVisible = false
+            when (registerState) {
+                RegisterState.NameEmpty -> {
+                    binding.nameBox.error = getString(R.string.name_is_emtpy)
+                }
+                RegisterState.Loading -> {
+                    binding.progress.isVisible = true
+                }
+                RegisterState.BioEmpty -> {
+                    binding.bioBox.error = getString(R.string.bio_is_empty)
+                }
+                RegisterState.Success -> {
+                    Snackbar.make(binding.root, "OK!", Snackbar.LENGTH_SHORT).show()
+                }
+                RegisterState.Failure -> {
+                    Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
 
         binding.femaleCheckbox.setOnClickListener {
             binding.femaleCheckbox.runIfChecked { viewModel.checkFemale() }
@@ -55,24 +83,7 @@ class RegisterScreen : Fragment() {
 
         viewModel.init()
 
-        viewModel.observeRegisterState(viewLifecycleOwner) { registerState ->
-            when (registerState) {
-                RegisterState.NameEmpty -> {
-                    binding.nameBox.error = getString(R.string.name_is_emtpy)
-                }
-                RegisterState.BioEmpty -> {
-                    binding.bioBox.error = getString(R.string.bio_is_empty)
-                }
-                RegisterState.Success -> {
-                    Snackbar.make(binding.root, "OK!", Snackbar.LENGTH_SHORT).show()
-                }
-                RegisterState.Failure -> {
-                    Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-            }
-            viewModel.resetRegisterState()
-        }
+
 
         return binding.root
     }

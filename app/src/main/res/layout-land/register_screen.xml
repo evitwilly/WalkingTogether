@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:gravity="top|start"
         app:boxBackgroundColor="@color/white"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@id/avatar_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +65,6 @@
             android:id="@+id/name_edit"
             android:imeOptions="flagNoExtractUi"
             android:layout_width="match_parent"
-            android:layout_marginStart="8dp"
             android:layout_height="match_parent"
             android:hint="@string/name"
             android:gravity="top|start" />
@@ -74,12 +74,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/bio_box"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="100"
         app:boxBackgroundColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/avatar_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_box"
         android:layout_marginStart="8dp"
         style="@style/My.TextInputLayout.FilledBox.Padding"
         app:layout_constraintTop_toBottomOf="@id/name_box">
@@ -89,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top|start"
-            android:lines="5"
             android:imeOptions="flagNoExtractUi"
             android:maxLength="100"
             android:maxLines="5"/>
@@ -123,5 +123,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:indeterminate="true"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

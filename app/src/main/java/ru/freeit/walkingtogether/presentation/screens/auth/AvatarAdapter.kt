@@ -7,15 +7,15 @@ import ru.freeit.walkingtogether.databinding.AvatarListItemBinding
 
 class AvatarAdapter(
     private val listener: AvatarListItemListener,
-    private val drawableResources: List<Int>
+    private val avatars: List<AvatarImage>
 ) : RecyclerView.Adapter<AvatarAdapter.AvatarViewHolder>() {
 
     class AvatarViewHolder(private val binding: AvatarListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(drawableId: Int, listener: AvatarListItemListener) {
-            binding.avatarImage.setImageResource(drawableId)
+        fun bind(avatar: AvatarImage, listener: AvatarListItemListener) {
+            binding.avatarImage.setImageResource(avatar.drawable())
             binding.avatarImage.setOnClickListener {
-                listener.onDrawableResource(drawableId)
+                listener.onAvatar(avatar)
             }
         }
 
@@ -27,6 +27,6 @@ class AvatarAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AvatarViewHolder.from(parent)
-    override fun onBindViewHolder(holder: AvatarViewHolder, position: Int) = holder.bind(drawableResources[position], listener)
-    override fun getItemCount() = drawableResources.size
+    override fun onBindViewHolder(holder: AvatarViewHolder, position: Int) = holder.bind(avatars[position], listener)
+    override fun getItemCount() = avatars.size
 }

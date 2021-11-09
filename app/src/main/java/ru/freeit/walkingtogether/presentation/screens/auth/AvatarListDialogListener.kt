@@ -7,15 +7,15 @@ import androidx.lifecycle.LifecycleOwner
 class AvatarListDialogListener(private val manager: FragmentManager) {
 
     private val requestKey = "avatar_list_dialog_key"
-    private val drawableResourceKey = "drawable_resource_key"
+    private val avatarIdKey = "avatar_id_key"
 
-    fun setResult(imgId: Int) {
-        manager.setFragmentResult(requestKey, bundleOf(drawableResourceKey to imgId))
+    fun setResult(avatarId: Int) {
+        manager.setFragmentResult(requestKey, bundleOf(avatarIdKey to avatarId))
     }
 
-    fun listen(lifecycleOwner: LifecycleOwner, onDrawableResourceListener: (imgId: Int) -> Unit) {
+    fun listen(lifecycleOwner: LifecycleOwner, onAvatarId: (imgId: Int) -> Unit) {
         manager.setFragmentResultListener(requestKey, lifecycleOwner, { _, result ->
-            onDrawableResourceListener(result.getInt(drawableResourceKey, 0))
+            onAvatarId(result.getInt(avatarIdKey, 0))
         })
     }
 }
