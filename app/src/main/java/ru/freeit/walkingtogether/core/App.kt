@@ -20,6 +20,8 @@ class App : Application() {
 
     private val firebaseDatabase by lazy { MyFirebaseDatabase() }
 
+    val appPrefs by lazy { AppSharedPreferences(this) }
+
     val viewModelFactories by lazy { ViewModelFactories(firebaseDatabase) }
 
 }

@@ -1,28 +1,6 @@
-package ru.freeit.walkingtogether.presentation.screens.auth
+package ru.freeit.walkingtogether.data.firebasedb.entity
 
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import com.google.firebase.database.DataSnapshot
-
-// TODO maybe add a new User class
-//data class User(
-//    private val id: String,
-//    private val name: String,
-//    private val bio: String,
-//    private val isFemale: Boolean = true,
-//    private val drawableId: Int = -1
-//) {
-//
-//}
-
-class AppPreferences(ctx: Context) {
-
-    private val appPrefsKey = "app_prefs_key"
-
-    private val appPrefs = ctx.getSharedPreferences(appPrefsKey, MODE_PRIVATE)
-
-
-}
 
 data class FirebaseUser(
     private val id: String,
@@ -41,8 +19,6 @@ data class FirebaseUser(
         isFemaleKey to isFemale,
         drawableIdKey to drawableId
     )
-
-
 
     companion object {
         private const val nameKey = "name"

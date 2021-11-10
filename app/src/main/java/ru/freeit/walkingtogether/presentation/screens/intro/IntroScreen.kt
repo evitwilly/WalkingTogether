@@ -6,26 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
-import ru.freeit.walkingtogether.databinding.IntroScreenBinding
-import ru.freeit.walkingtogether.core.GoogleSignClient
 import ru.freeit.walkingtogether.core.GoogleAuthData
-import ru.freeit.walkingtogether.presentation.screens.register.RegisterScreen
-
-class MyNavigator(private val manager: FragmentManager) {
-    fun register(id: String) {
-        manager.beginTransaction()
-            .replace(R.id.fragment_container, RegisterScreen.newInstance(id))
-            .addToBackStack(null)
-            .commit()
-    }
-}
+import ru.freeit.walkingtogether.core.GoogleSignClient
+import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 
 class IntroScreen : Fragment() {
 
@@ -42,10 +31,6 @@ class IntroScreen : Fragment() {
         val navigator = MyNavigator(parentFragmentManager)
 
         if (account.isLogin()) {
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, RegisterScreen.newInstance(account.id()))
-//                .addToBackStack(null)
-//                .commit()
             navigator.register(account.id())
         }
 
@@ -55,10 +40,6 @@ class IntroScreen : Fragment() {
                 val account = task.getResult(ApiException::class.java)
 
                 navigator.register(account.id!!)
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_container, RegisterScreen.newInstance(googleAccountId))
-//                    .addToBackStack(null)
-//                    .commit()
 
             } catch (e: ApiException) {
                 Snackbar.make(binding.root, R.string.missing_internet, Snackbar.LENGTH_SHORT).show()
