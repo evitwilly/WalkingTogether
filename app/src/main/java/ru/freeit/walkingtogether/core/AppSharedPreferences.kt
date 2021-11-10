@@ -17,35 +17,38 @@ interface StringPrefs {
     fun str(key: String, def: String) : String
 }
 
-class AppSharedPreferences(ctx: Context) : BooleanPrefs, IntPrefs, StringPrefs {
+interface AppSharedPreferences : BooleanPrefs, IntPrefs, StringPrefs {
 
-    private val appPrefsKey = "app_prefs_key"
+    fun apply()
+    suspend fun commit() : Boolean
 
-    private val appPrefs = ctx.getSharedPreferences(appPrefsKey, Context.MODE_PRIVATE)
+    class Base(ctx: Context) : AppSharedPreferences {
+        private val appPrefsKey = "app_prefs_key"
 
-    override fun saveBoolean(key: String, value: Boolean) {
-        appPrefs.edit()
-            .putBoolean(key, value)
-            .apply()
+        private val appPrefs = ctx.getSharedPreferences(appPrefsKey, Context.MODE_PRIVATE)
+        private val edit = appPrefs.edit()
+
+        override fun saveBoolean(key: String, value: Boolean) {
+            appPrefs.edit().putBoolean(key, value)
+        }
+
+        override fun apply() = edit.apply()
+        override suspend fun commit() = edit.commit()
+
+        override fun bool(key: String, def: Boolean) = appPrefs.getBoolean(key, def)
+
+        override fun saveInt(key: String, value: Int) {
+            appPrefs.edit().putInt(key, value)
+        }
+
+        override fun int(key: String, def: Int) = appPrefs.getInt(key, def)
+
+        override fun saveString(key: String, value: String) {
+            appPrefs.edit().putString(key, value)
+        }
+
+        override fun str(key: String, def: String) = appPrefs.getString(key, def) ?: def
     }
-
-    override fun bool(key: String, def: Boolean) = appPrefs.getBoolean(key, def)
-
-    override fun saveInt(key: String, value: Int) {
-        appPrefs.edit()
-            .putInt(key, value)
-            .apply()
-    }
-
-    override fun int(key: String, def: Int) = appPrefs.getInt(key, def)
-
-    override fun saveString(key: String, value: String) {
-        appPrefs.edit()
-            .putString(key, value)
-            .apply()
-    }
-
-    override fun str(key: String, def: String) = appPrefs.getString(key, def) ?: def
 
 
 }

@@ -7,14 +7,16 @@ import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.freeit.walkingtogether.core.AppSharedPreferences
 import ru.freeit.walkingtogether.core.CoroutineViewModel
-import ru.freeit.walkingtogether.presentation.screens.auth.FirebaseUser
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 
 
 class RegisterViewModel(
     private val id: String,
     private val savedState: SavedStateHandle,
+    private val appPrefs: AppSharedPreferences,
     private val database: MyFirebaseDatabase
 ) : CoroutineViewModel() {
 
@@ -71,7 +73,9 @@ class RegisterViewModel(
             try {
                 registerState.value = RegisterState.Loading
                 withContext(Dispatchers.IO) {
-                    database.add(FirebaseUser(id, name, bio, isFemale, avatar.id()))
+                    val user = FirebaseUser(id, name, bio, isFemale, avatar.id())
+                    database.add(user)
+                    user.save(appPrefs)
                 }
                 registerState.value = RegisterState.Success
             } catch (exc: Exception) {

@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
+import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
 class RegisterScreen : Fragment() {
 
@@ -33,6 +34,7 @@ class RegisterScreen : Fragment() {
         val viewModelFactory = app.viewModelFactories.register(id, this, savedInstanceState)
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(RegisterViewModel::class.java)
+        val navigator = MyNavigator(parentFragmentManager)
 
         binding.avatarImage.setOnClickListener {
             AvatarListDialog.newInstance(binding.femaleCheckbox.isChecked)
@@ -59,15 +61,15 @@ class RegisterScreen : Fragment() {
                 RegisterState.BioEmpty -> {
                     binding.bioBox.error = getString(R.string.bio_is_empty)
                 }
-                RegisterState.Success -> {
-                    Snackbar.make(binding.root, "OK!", Snackbar.LENGTH_SHORT).show()
-                }
+                RegisterState.Success -> { navigator.main() }
                 RegisterState.Failure -> {
                     Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
                         .show()
                 }
             }
         }
+
+        binding.backButton?.setOnClickListener { navigator.back() }
 
         binding.femaleCheckbox.setOnClickListener {
             binding.femaleCheckbox.runIfChecked { viewModel.checkFemale() }
@@ -82,8 +84,6 @@ class RegisterScreen : Fragment() {
         }
 
         viewModel.init()
-
-
 
         return binding.root
     }

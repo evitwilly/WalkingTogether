@@ -5,7 +5,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.freeit.walkingtogether.core.FirebaseException
-import ru.freeit.walkingtogether.presentation.screens.auth.FirebaseUser
+import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
+
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
