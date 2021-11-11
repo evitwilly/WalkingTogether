@@ -35,7 +35,7 @@ class IntroScreen : Fragment() {
         viewModel.observeUserState(viewLifecycleOwner) { userState ->
             when (userState) {
                 is UserState.Success -> {
-                   navigator.main()
+                   navigator.map()
                 }
                 is UserState.None -> {
                     navigator.register(userState.id())

@@ -13,8 +13,10 @@ import ru.freeit.walkingtogether.databinding.ActivityMainBinding
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 import ru.freeit.walkingtogether.presentation.screens.main.MainScreen
+import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val navigator = MyNavigator(supportFragmentManager)
 
         supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
-            binding.bottomNavigation.isVisible = fragment is MainScreen
+            binding.bottomNavigation.isVisible = fragment is MainScreen || fragment is MapScreen
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { selectedItem ->
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val isLogin = viewModel.isLogin()
             binding.bottomNavigation.isVisible = isLogin
             if (isLogin) {
-                navigator.main()
+                navigator.map()
             } else {
                 navigator.intro()
             }

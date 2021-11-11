@@ -61,7 +61,7 @@ class RegisterScreen : Fragment() {
                 RegisterState.BioEmpty -> {
                     binding.bioBox.error = getString(R.string.bio_is_empty)
                 }
-                RegisterState.Success -> { navigator.main() }
+                RegisterState.Success -> { navigator.map() }
                 RegisterState.Failure -> {
                     Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
                         .show()
