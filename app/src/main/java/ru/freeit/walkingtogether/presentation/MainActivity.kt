@@ -15,6 +15,8 @@ import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 import ru.freeit.walkingtogether.presentation.screens.main.MainScreen
 import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
+import ru.freeit.walkingtogether.presentation.screens.profile.ProfileScreen
+import ru.freeit.walkingtogether.presentation.screens.walk.WalkScreen
 
 fun Button.disable() {
     this.isEnabled = false
@@ -37,19 +39,19 @@ class MainActivity : AppCompatActivity() {
         val navigator = MyNavigator(supportFragmentManager)
 
         supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
-            binding.bottomNavigation.isVisible = fragment is MainScreen || fragment is MapScreen
+            binding.bottomNavigation.isVisible = navigator.isBottomNavigation(fragment)
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { selectedItem ->
             when (selectedItem.itemId) {
                 R.id.maps -> {
-
+                    navigator.map()
                 }
                 R.id.profile -> {
-
+                    navigator.profile()
                 }
                 R.id.walkings -> {
-
+                    navigator.walk()
                 }
             }
             true
