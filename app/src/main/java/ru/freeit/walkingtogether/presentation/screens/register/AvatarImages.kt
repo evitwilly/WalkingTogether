@@ -1,5 +1,6 @@
 package ru.freeit.walkingtogether.presentation.screens.register
 
+import android.widget.ImageView
 import ru.freeit.walkingtogether.R
 
 data class AvatarImage(
@@ -35,6 +36,7 @@ class AvatarImages {
     private val images = female + male
 
     fun drawableBy(id: Int) = images[id]
+
 
 //    private val maleImages = listOf(
 //        R.drawable.boy1,
