@@ -10,4 +10,7 @@
     <string name="name_is_emtpy">ваше имя пустое</string>
     <string name="bio_is_empty">напишите хоть что-нибудь</string>
     <string name="login_with_another_google_account">войти через другой аккаунт</string>
+    <string name="maps">Карта</string>
+    <string name="profile">Профиль</string>
+    <string name="walkings">Прогулки</string>
 </resources>

@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.core.AppSharedPreferences
 import ru.freeit.walkingtogether.core.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 
 import ru.freeit.walkingtogether.databinding.MainScreenBinding
+import ru.freeit.walkingtogether.presentation.MainActivity
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
 class WalkingViewModelFactory(private val appPrefs: AppSharedPreferences) : ViewModelProvider.Factory {
