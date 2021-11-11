@@ -29,7 +29,7 @@ interface AppSharedPreferences : BooleanPrefs, IntPrefs, StringPrefs {
         private val edit = appPrefs.edit()
 
         override fun saveBoolean(key: String, value: Boolean) {
-            appPrefs.edit().putBoolean(key, value)
+            edit.putBoolean(key, value)
         }
 
         override fun apply() = edit.apply()
@@ -38,13 +38,13 @@ interface AppSharedPreferences : BooleanPrefs, IntPrefs, StringPrefs {
         override fun bool(key: String, def: Boolean) = appPrefs.getBoolean(key, def)
 
         override fun saveInt(key: String, value: Int) {
-            appPrefs.edit().putInt(key, value)
+            edit.putInt(key, value)
         }
 
         override fun int(key: String, def: Int) = appPrefs.getInt(key, def)
 
         override fun saveString(key: String, value: String) {
-            appPrefs.edit().putString(key, value)
+            edit.putString(key, value)
         }
 
         override fun str(key: String, def: String) = appPrefs.getString(key, def) ?: def

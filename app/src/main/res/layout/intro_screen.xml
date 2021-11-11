@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="32dp"
     android:layout_width="match_parent"
@@ -13,13 +14,28 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/google_icon" />
 
-    <ru.freeit.walkingtogether.presentation.view.SelfTextView
-        app:startString=""
-        app:endString="Войдите через Google аккаунт"
-        android:textSize="28sp"
+
+    <FrameLayout
         android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="Войдите через Google аккаунт"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ru.freeit.walkingtogether.presentation.view.SelfTextView
+            app:startString=""
+            app:endString="Войдите через Google аккаунт"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+
 
     <Button
         android:id="@+id/login_button"

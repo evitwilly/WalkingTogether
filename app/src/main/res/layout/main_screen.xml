@@ -10,5 +10,11 @@
         android:text="Hello, user!"
         android:layout_gravity="center" />
 
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выйти"/>
+
 
 </FrameLayout>

@@ -43,6 +43,15 @@ data class FirebaseUser(
 
         fun empty() = FirebaseUser("")
 
+        suspend fun logout(appPrefs: AppSharedPreferences) {
+            appPrefs.saveBoolean(isFemaleKey, true)
+            appPrefs.saveString(nameKey, "")
+            appPrefs.saveString(bioKey, "")
+            appPrefs.saveString(idKey, "")
+            appPrefs.saveInt(avatarIdKey, -1)
+            appPrefs.commit()
+        }
+
         fun restore(appPrefs: AppSharedPreferences) = FirebaseUser(
             appPrefs.str(idKey, ""),
             appPrefs.str(nameKey, ""),
@@ -57,7 +66,7 @@ data class FirebaseUser(
                 data.child(nameKey).value.toString(),
                 data.child(bioKey).value.toString(),
                 data.child(isFemaleKey).value as Boolean,
-                data.child(avatarIdKey).value as Int
+                (data.child(avatarIdKey).value as Long).toInt()
             )
         }
     }

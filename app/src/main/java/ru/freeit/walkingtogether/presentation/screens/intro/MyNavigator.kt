@@ -15,14 +15,15 @@ class MyNavigator(private val manager: FragmentManager) {
             .commit()
     }
     fun intro() {
+        manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         manager.beginTransaction()
-            .add(R.id.fragment_container, IntroScreen())
+            .replace(R.id.fragment_container, IntroScreen())
             .commit()
     }
     fun main() {
-//        manager.fragments.clear()
+        manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         manager.beginTransaction()
-            .add(containerId, MainScreen())
+            .replace(containerId, MainScreen())
             .commit()
     }
 
