@@ -13,6 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
+import ru.freeit.walkingtogether.presentation.disable
+import ru.freeit.walkingtogether.presentation.enable
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
 class RegisterScreen : Fragment() {
@@ -67,6 +69,7 @@ class RegisterScreen : Fragment() {
                         .show()
                 }
             }
+            binding.registerButton.enable()
         }
 
         binding.backButton?.setOnClickListener { navigator.back() }
@@ -79,6 +82,7 @@ class RegisterScreen : Fragment() {
         }
 
         binding.registerButton.setOnClickListener {
+            binding.registerButton.disable()
             viewModel.register(binding.femaleCheckbox.isChecked, binding.nameEdit.text.toString(),
                 binding.bioEdit.text.toString())
         }

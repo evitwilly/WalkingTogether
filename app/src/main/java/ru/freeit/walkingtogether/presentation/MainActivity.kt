@@ -2,6 +2,7 @@ package ru.freeit.walkingtogether.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,6 +15,14 @@ import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 import ru.freeit.walkingtogether.presentation.screens.main.MainScreen
 import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
+
+fun Button.disable() {
+    this.isEnabled = false
+}
+
+fun Button.enable() {
+    this.isEnabled = true
+}
 
 class MainActivity : AppCompatActivity() {
 

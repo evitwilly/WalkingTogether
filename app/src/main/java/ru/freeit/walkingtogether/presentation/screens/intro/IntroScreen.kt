@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,8 +16,12 @@ import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
+import ru.freeit.walkingtogether.presentation.disable
+import ru.freeit.walkingtogether.presentation.enable
 
 class IntroScreen : Fragment() {
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +46,7 @@ class IntroScreen : Fragment() {
                     navigator.register(userState.id())
                 }
             }
+            binding.loginButton.enable()
         }
 
         val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
@@ -50,10 +56,14 @@ class IntroScreen : Fragment() {
                 viewModel.check(account.id!!)
             } catch (e: ApiException) {
                 Snackbar.make(binding.root, R.string.missing_internet, Snackbar.LENGTH_SHORT).show()
+                binding.loginButton.enable()
             }
         }
 
-        binding.loginButton.setOnClickListener { googleSignInLauncher.launch(viewModel.signInIntent()) }
+        binding.loginButton.setOnClickListener {
+            binding.loginButton.disable()
+            googleSignInLauncher.launch(viewModel.signInIntent())
+        }
 
         return binding.root
     }
