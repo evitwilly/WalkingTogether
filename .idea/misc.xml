@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v21/edit_button_ripple.xml" value="0.35625" />
         <entry key="app/src/main/res/layout-land/avatar_list_dialog.xml" value="0.18253968253968253" />
         <entry key="app/src/main/res/layout-land/register_screen.xml" value="0.1675485008818342" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16540020263424518" />

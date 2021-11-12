@@ -13,4 +13,7 @@
     <string name="maps">Карта</string>
     <string name="profile">Профиль</string>
     <string name="walkings">Прогулки</string>
+    <string name="your_profile">Ваш профиль</string>
+    <string name="logout">выйти</string>
+    <string name="change_avatar">изменить аватарку</string>
 </resources>

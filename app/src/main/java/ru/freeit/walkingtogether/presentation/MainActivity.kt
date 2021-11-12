@@ -11,12 +11,10 @@ import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 import ru.freeit.walkingtogether.databinding.ActivityMainBinding
+import ru.freeit.walkingtogether.databinding.MapScreenBinding
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
-import ru.freeit.walkingtogether.presentation.screens.main.MainScreen
-import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
-import ru.freeit.walkingtogether.presentation.screens.profile.ProfileScreen
-import ru.freeit.walkingtogether.presentation.screens.walk.WalkScreen
+
 
 fun Button.disable() {
     this.isEnabled = false

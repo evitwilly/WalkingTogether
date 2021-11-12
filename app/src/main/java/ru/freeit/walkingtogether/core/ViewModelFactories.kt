@@ -7,7 +7,8 @@ import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 import ru.freeit.walkingtogether.presentation.MainViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModel
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModelFactory
-import ru.freeit.walkingtogether.presentation.screens.main.WalkingViewModelFactory
+import ru.freeit.walkingtogether.presentation.screens.profile.ProfileViewModel
+import ru.freeit.walkingtogether.presentation.screens.profile.ProfileViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.register.RegisterViewModelFactory
 
 class ViewModelFactories(
@@ -17,5 +18,5 @@ class ViewModelFactories(
     fun register(id: String, owner: SavedStateRegistryOwner, bundle: Bundle?) = RegisterViewModelFactory(id, database, appPrefs, owner, bundle)
     fun intro(ctx: Context) = IntroViewModelFactory(ctx, appPrefs, database)
     fun main() = MainViewModelFactory(appPrefs)
-    fun walking() = WalkingViewModelFactory(appPrefs)
+    fun profile() = ProfileViewModelFactory(appPrefs, database)
 }
