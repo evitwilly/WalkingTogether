@@ -8,44 +8,41 @@
     android:gravity="center"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/google_icon" />
 
-
-    <FrameLayout
-        android:layout_marginBottom="16dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/logo_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="30sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:text="Войдите через Google аккаунт"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/walking" />
 
-        <ru.freeit.walkingtogether.presentation.view.SelfTextView
-            app:startString=""
-            app:endString="Войдите через Google аккаунт"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
-
-
+    <androidx.appcompat.widget.AppCompatTextView
+        android:text="@string/login_through_google_account"
+        android:textSize="30sp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/login_button"
         android:text="@string/login"
-        android:drawableEnd="@drawable/ic_login_24"
-        android:drawableTint="@color/white"
-        android:paddingStart="32dp"
+        app:icon="@drawable/ic_google"
+        app:iconGravity="end"
+        app:iconTint="@android:color/transparent"
+        android:paddingStart="40dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:paddingEnd="32dp"
+        app:iconPadding="16dp"
+        app:iconTintMode="add"
+        android:paddingEnd="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp" />

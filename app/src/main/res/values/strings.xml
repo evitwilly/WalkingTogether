@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WalkingTogether</string>
+    <string name="app_name">Walkether</string>
     <string name="login">войти</string>
     <string name="male">Мужской</string>
     <string name="female">Женский</string>
@@ -16,4 +16,5 @@
     <string name="your_profile">Ваш профиль</string>
     <string name="logout">выйти</string>
     <string name="change_avatar">изменить аватарку</string>
+    <string name="login_through_google_account">Войдите через ваш Google аккаунт</string>
 </resources>

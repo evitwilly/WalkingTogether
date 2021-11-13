@@ -1,11 +1,20 @@
 package ru.freeit.walkingtogether.presentation.screens.intro
 
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannedString
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -36,6 +45,16 @@ class IntroScreen : Fragment() {
         }
 
         val navigator = MyNavigator(parentFragmentManager)
+
+        binding.logoText.text = SpannableString(getString(R.string.app_name)).apply {
+            setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.purple_300)), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.purple_800)), 4, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(1.5f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(1.5f), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(1.5f), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(1.2f), 5, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(1.2f), 6, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
 
         viewModel.observeUserState(viewLifecycleOwner) { userState ->
             when (userState) {
