@@ -30,8 +30,6 @@ import ru.freeit.walkingtogether.presentation.enable
 
 class IntroScreen : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
