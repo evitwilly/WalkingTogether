@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseAuthSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.core.AppSharedPreferences
-import ru.freeit.walkingtogether.core.CoroutineViewModel
+import ru.freeit.walkingtogether.core.data.AppSharedPreferences
+import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 

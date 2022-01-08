@@ -1,8 +1,9 @@
-package ru.freeit.walkingtogether.core
+package ru.freeit.walkingtogether.core.viewmodel
 
 import android.content.Context
 import android.os.Bundle
 import androidx.savedstate.SavedStateRegistryOwner
+import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 import ru.freeit.walkingtogether.presentation.MainViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModel

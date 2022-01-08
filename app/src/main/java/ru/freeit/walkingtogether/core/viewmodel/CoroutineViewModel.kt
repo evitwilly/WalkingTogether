@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.core
+package ru.freeit.walkingtogether.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

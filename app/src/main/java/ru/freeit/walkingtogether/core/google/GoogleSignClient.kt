@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.core
+package ru.freeit.walkingtogether.core.google
 
 import android.app.Activity
 import android.content.Context

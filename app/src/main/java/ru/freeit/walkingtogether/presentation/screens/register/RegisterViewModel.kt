@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.freeit.walkingtogether.core.AppSharedPreferences
-import ru.freeit.walkingtogether.core.CoroutineViewModel
+import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 

@@ -1,7 +1,7 @@
 package ru.freeit.walkingtogether.data.firebasedb.entity
 
 import com.google.firebase.database.DataSnapshot
-import ru.freeit.walkingtogether.core.AppSharedPreferences
+import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.domain.entity.User
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 
