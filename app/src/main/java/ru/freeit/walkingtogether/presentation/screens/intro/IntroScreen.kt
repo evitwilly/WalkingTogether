@@ -1,21 +1,19 @@
 package ru.freeit.walkingtogether.presentation.screens.intro
 
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.Shape
+import android.app.Activity.RESULT_CANCELED
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.SpannedString
-import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -24,40 +22,36 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
+import ru.freeit.walkingtogether.core.delegates.viewBinding
+import ru.freeit.walkingtogether.core.extensions.color
+import ru.freeit.walkingtogether.core.extensions.logoText
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.presentation.disable
 import ru.freeit.walkingtogether.presentation.enable
 
-class IntroScreen : Fragment() {
+abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
+    protected val factories by lazy {
+        (requireActivity().application as App).viewModelFactories
+    }
+}
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = IntroScreenBinding.inflate(inflater, container, false)
+class IntroScreen : BaseFragment(R.layout.intro_screen) {
 
-        val factory = (requireActivity().application as App).viewModelFactories.intro(requireActivity())
-        val viewModel = ViewModelProvider(this, factory).get(IntroViewModel::class.java).apply {
-            signOut()
-        }
+    private val binding by viewBinding(IntroScreenBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val viewModel = ViewModelProvider(this, factories.intro(requireActivity())).get(IntroViewModel::class.java)
 
         val navigator = MyNavigator(parentFragmentManager)
 
-        binding.logoText.text = SpannableString(getString(R.string.app_name)).apply {
-            setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.purple_300)), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.purple_800)), 4, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(RelativeSizeSpan(1.5f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(RelativeSizeSpan(1.5f), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(RelativeSizeSpan(1.5f), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(RelativeSizeSpan(1.2f), 5, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            setSpan(RelativeSizeSpan(1.2f), 6, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
+        binding.logoText.logoText()
 
         viewModel.observeUserState(viewLifecycleOwner) { userState ->
             when (userState) {
                 is UserState.Success -> {
-                   navigator.map()
+                    navigator.map()
                 }
                 is UserState.None -> {
                     navigator.register(userState.id())
@@ -67,11 +61,15 @@ class IntroScreen : Fragment() {
         }
 
         val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            if (activityResult.resultCode == RESULT_CANCELED) {
+                return@registerForActivityResult
+            }
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
             try {
                 val account = task.getResult(ApiException::class.java)
                 viewModel.check(account.id!!)
             } catch (e: ApiException) {
+                e.printStackTrace()
                 Snackbar.make(binding.root, R.string.missing_internet, Snackbar.LENGTH_SHORT).show()
                 binding.loginButton.enable()
             }
@@ -81,8 +79,5 @@ class IntroScreen : Fragment() {
             binding.loginButton.disable()
             googleSignInLauncher.launch(viewModel.signInIntent())
         }
-
-        return binding.root
     }
-
 }

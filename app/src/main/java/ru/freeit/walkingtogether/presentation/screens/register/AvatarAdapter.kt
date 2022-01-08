@@ -20,14 +20,12 @@ class AvatarAdapter(
         }
 
         companion object {
-            fun from(parent: ViewGroup) = AvatarViewHolder(
-                AvatarListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+            fun from(parent: ViewGroup) = AvatarViewHolder(AvatarListItemBinding.inflate(LayoutInflater
+                .from(parent.context), parent, false))
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        AvatarViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AvatarViewHolder.from(parent)
     override fun onBindViewHolder(holder: AvatarViewHolder, position: Int) = holder.bind(avatars[position], listener)
     override fun getItemCount() = avatars.size
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.google.firebase.FirebaseApp
+import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.core.viewmodel.ViewModelFactories
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 
