@@ -26,7 +26,7 @@ class IntroScreen : BaseFragment(R.layout.intro_screen) {
 
         viewModel.observeUserState(viewLifecycleOwner) { userState ->
             when (userState) {
-                is UserState.Success -> navigator.map()
+                is UserState.Success -> navigator.main()
                 is UserState.None -> navigator.register(userState.id())
             }
             binding.loginButton.enable()

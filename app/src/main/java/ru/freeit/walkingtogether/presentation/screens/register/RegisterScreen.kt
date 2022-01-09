@@ -16,8 +16,6 @@ import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.*
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
-import ru.freeit.walkingtogether.presentation.disable
-import ru.freeit.walkingtogether.presentation.enable
 import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
@@ -46,7 +44,7 @@ class RegisterScreen : BaseFragment(R.layout.register_screen) {
                 RegisterState.NameEmpty -> binding.nameBox.error(R.string.name_is_emtpy)
                 RegisterState.BioEmpty -> binding.bioBox.error(R.string.bio_is_empty)
                 RegisterState.Loading -> binding.progress.visible()
-                RegisterState.Success -> navigator.map()
+                RegisterState.Success -> navigator.main()
                 RegisterState.Failure -> binding.root.snackBar(R.string.missing_internet)
                 RegisterState.GoogleError -> {
                     binding.avatarBox.gone()

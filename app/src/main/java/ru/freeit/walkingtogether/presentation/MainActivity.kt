@@ -22,24 +22,24 @@ class MainActivity : AppCompatActivity() {
 
         val navigator = MyNavigator(supportFragmentManager)
 
-        supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
-            binding.bottomNavigation.isVisible = navigator.isBottomNavigation(fragment)
-        }
-
-        binding.bottomNavigation.setOnItemSelectedListener { selectedItem ->
-            when (selectedItem.itemId) {
-                R.id.maps -> { navigator.map() }
-                R.id.profile -> { navigator.profile() }
-                R.id.walkings -> { navigator.walk() }
-            }
-            true
-        }
+//        supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
+//            binding.bottomNavigation.isVisible = navigator.isBottomNavigation(fragment)
+//        }
+//
+//        binding.bottomNavigation.setOnItemSelectedListener { selectedItem ->
+//            when (selectedItem.itemId) {
+//                R.id.maps -> { navigator.map() }
+//                R.id.profile -> { navigator.profile() }
+//                R.id.walkings -> { navigator.walk() }
+//            }
+//            true
+//        }
 
         if (savedInstanceState == null) {
             val isLogin = viewModel.isLogin()
-            binding.bottomNavigation.isVisible = isLogin
+//            binding.bottomNavigation.isVisible = isLogin
             if (isLogin) {
-                navigator.map()
+                navigator.main()
             } else {
                 navigator.intro()
             }

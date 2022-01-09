@@ -8,13 +8,15 @@ import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.databinding.FragmentNavHostBinding
 
-class NavHostFragment : Fragment() {
+class NavHostFragment : Fragment(R.layout.fragment_nav_host) {
+
     private val binding by viewBinding(FragmentNavHostBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuId = arguments?.getInt(menuIdKey) ?: R.id.maps
+        binding.viewPager2.adapter = NavHostAdapter(this)
+        binding.viewPager2.isUserInputEnabled = false
 
         binding.bottomNavigation.setOnItemSelectedListener { selectedItem ->
             when (selectedItem.itemId) {
@@ -24,15 +26,7 @@ class NavHostFragment : Fragment() {
             }
             true
         }
-        binding.bottomNavigation.selectedItemId = menuId
 
-    }
-
-    companion object {
-        private const val menuIdKey = "menu_id_key"
-        fun newInstance(menuId: Int) = NavHostFragment().apply {
-            arguments = bundleOf(menuIdKey to menuId)
-        }
     }
 
 }
