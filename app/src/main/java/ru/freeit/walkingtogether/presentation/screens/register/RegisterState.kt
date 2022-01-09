@@ -6,4 +6,5 @@ sealed class RegisterState {
     object Success : RegisterState()
     object Failure : RegisterState()
     object Loading: RegisterState()
+    object GoogleError: RegisterState()
 }

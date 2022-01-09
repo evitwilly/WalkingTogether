@@ -8,8 +8,11 @@ data class AvatarImage(
     private val drawableId: Int,
 ) {
     fun id() = id
-    fun drawable() = drawableId
+    fun img(view: ImageView) {
+        view.setImageResource(drawableId)
+    }
 }
+
 
 class AvatarImages {
 
@@ -37,33 +40,24 @@ class AvatarImages {
 
     fun drawableBy(id: Int) = images[id]
 
-
-//    private val maleImages = listOf(
-//        R.drawable.boy1,
-//        R.drawable.boy2,
-//        R.drawable.boy3,
-//        R.drawable.boy4,
-//        R.drawable.boy5,
-//        R.drawable.boy6,
-//        R.drawable.boy7
-//    )
-//
-//    private val femaleImages = listOf(
-//        R.drawable.girl1,
-//        R.drawable.girl2,
-//        R.drawable.girl3,
-//        R.drawable.girl4,
-//        R.drawable.girl5,
-//        R.drawable.girl6,
-//        R.drawable.girl7
-//    )
-
-
     fun randomFemale() = female.random()
     fun randomMale() = male.random()
 
     fun female() = female
     fun male() = male
 
+    fun isFemale(img: AvatarImage?) : Boolean {
+        if (img == null) {
+            return false
+        }
+        return female.contains(img)
+    }
+
+    fun isMale(img: AvatarImage?) : Boolean {
+        if (img == null) {
+            return false
+        }
+        return male.contains(img)
+    }
 
 }

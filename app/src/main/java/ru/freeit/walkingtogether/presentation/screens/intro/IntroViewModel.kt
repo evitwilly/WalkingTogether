@@ -21,7 +21,7 @@ class IntroViewModel(
 
     private val userState = MutableLiveData<UserState>()
 
-    init {
+    fun signOut() {
         googleSignClient.signOut()
         userState.value = null
     }

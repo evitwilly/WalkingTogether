@@ -82,6 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"
         app:iconPadding="16dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         app:icon="@drawable/ic_image_24"
         android:text="@string/change_avatar"
         android:gravity="start|center_vertical"
@@ -96,101 +98,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"
         app:iconPadding="16dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         app:icon="@drawable/ic_logout_24"
         android:text="@string/logout"
         android:gravity="start|center_vertical"
         app:layout_constraintTop_toBottomOf="@id/avatar_box"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
-
-<!--    <RadioGroup-->
-<!--        android:id="@+id/gender"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_height="wrap_content" >-->
-
-<!--        <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--            android:id="@+id/male_checkbox"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/male"/>-->
-
-<!--        <androidx.appcompat.widget.AppCompatRadioButton-->
-<!--            android:id="@+id/female_checkbox"-->
-<!--            android:checked="true"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/female"/>-->
-
-<!--    </RadioGroup>-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/name_box"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="top|start"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        app:boxBackgroundColor="@color/white"-->
-<!--        style="@style/My.TextInputLayout.FilledBox.Padding" >-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/name_edit"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:hint="@string/name"-->
-<!--            android:gravity="top|start" />-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/bio_box"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="top|start"-->
-<!--        app:counterEnabled="true"-->
-<!--        app:counterMaxLength="100"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        app:boxBackgroundColor="@color/white"-->
-<!--        style="@style/My.TextInputLayout.FilledBox.Padding">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/bio_edit"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:lines="5"-->
-<!--            android:hint="@string/bio"-->
-<!--            android:gravity="top|start"-->
-<!--            android:maxLength="100"-->
-<!--            android:maxLines="5"/>-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/register_button"-->
-<!--        android:paddingStart="32dp"-->
-<!--        android:paddingEnd="32dp"-->
-<!--        android:paddingTop="8dp"-->
-<!--        android:paddingBottom="8dp"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/register"/>-->
-
-<!--    <com.google.android.material.progressindicator.CircularProgressIndicator-->
-<!--        android:id="@+id/progress"-->
-<!--        android:visibility="gone"-->
-<!--        android:indeterminate="true"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    
 
 </LinearLayout>

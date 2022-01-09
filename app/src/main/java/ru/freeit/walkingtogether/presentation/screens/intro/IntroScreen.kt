@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
+import ru.freeit.walkingtogether.core.extensions.disable
+import ru.freeit.walkingtogether.core.extensions.enable
 import ru.freeit.walkingtogether.core.extensions.logoText
 import ru.freeit.walkingtogether.core.extensions.snackBar
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
-import ru.freeit.walkingtogether.presentation.disable
-import ru.freeit.walkingtogether.presentation.enable
 
 class IntroScreen : BaseFragment(R.layout.intro_screen) {
 
@@ -20,6 +20,7 @@ class IntroScreen : BaseFragment(R.layout.intro_screen) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(this, factories.intro(requireActivity())).get(IntroViewModel::class.java)
+        viewModel.signOut()
 
         binding.logoText.logoText()
 

@@ -18,7 +18,7 @@ data class User(
     fun isFemale() = isFemale
 
     fun img(image: ImageView) {
-        image.setImageResource(avatar.drawable())
+        avatar.img(image)
     }
     fun name(text: TextView) {
         text.text = name

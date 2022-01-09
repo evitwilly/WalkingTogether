@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.core.delegates.viewBinding
-import ru.freeit.walkingtogether.core.extensions.runIfChecked
+import ru.freeit.walkingtogether.core.extensions.*
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
 import ru.freeit.walkingtogether.presentation.disable
@@ -28,58 +28,47 @@ class RegisterScreen : BaseFragment(R.layout.register_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = arguments?.getString(googleAccountIdKey) ?: throw IllegalStateException("google id is empty!")
-
-        val viewModel = ViewModelProvider(this, factories.register(id, this, savedInstanceState))
+        val viewModel = ViewModelProvider(this, factories.register(arguments?.getString(googleAccountIdKey).emptyStringIfNull(), this, savedInstanceState))
             .get(RegisterViewModel::class.java)
 
         binding.avatarImage.setOnClickListener {
-            AvatarListDialog.newInstance(binding.femaleCheckbox.isChecked)
-                .show(parentFragmentManager)
+            AvatarListDialog.newInstance(binding.femaleCheckbox.isChecked).show(parentFragmentManager)
         }
 
         AvatarListDialogListener(parentFragmentManager).listen(viewLifecycleOwner, viewModel::selectAvatar)
 
-        viewModel.observeAvatar(viewLifecycleOwner) { avatarImage ->
-            binding.avatarImage.setImageResource(avatarImage.drawable())
-        }
-
+        viewModel.observeAvatar(viewLifecycleOwner) { avatarImage -> avatarImage.img(binding.avatarImage) }
         viewModel.observeRegisterState(viewLifecycleOwner) { registerState ->
-            binding.nameBox.error = null
-            binding.bioBox.error = null
-            binding.progress.isVisible = false
+            binding.nameBox.resetError()
+            binding.bioBox.resetError()
+            binding.progress.gone()
             when (registerState) {
-                RegisterState.NameEmpty -> {
-                    binding.nameBox.error = getString(R.string.name_is_emtpy)
-                }
-                RegisterState.Loading -> {
-                    binding.progress.isVisible = true
-                }
-                RegisterState.BioEmpty -> {
-                    binding.bioBox.error = getString(R.string.bio_is_empty)
-                }
-                RegisterState.Success -> { navigator.map() }
-                RegisterState.Failure -> {
-                    Snackbar.make(binding.root, getString(R.string.missing_internet), Snackbar.LENGTH_SHORT)
-                        .show()
+                RegisterState.NameEmpty -> binding.nameBox.error(R.string.name_is_emtpy)
+                RegisterState.BioEmpty -> binding.bioBox.error(R.string.bio_is_empty)
+                RegisterState.Loading -> binding.progress.visible()
+                RegisterState.Success -> navigator.map()
+                RegisterState.Failure -> binding.root.snackBar(R.string.missing_internet)
+                RegisterState.GoogleError -> {
+                    binding.avatarBox.gone()
+                    binding.gender.gone()
+                    binding.nameBox.gone()
+                    binding.bioBox.gone()
+                    binding.registerButton.gone()
+                    binding.progress.gone()
+                    binding.googleErrorBox.root.visible()
                 }
             }
             binding.registerButton.enable()
         }
 
-        binding.backButton?.setOnClickListener { navigator.back() }
-
-        binding.femaleCheckbox.setOnClickListener {
-            binding.femaleCheckbox.runIfChecked { viewModel.checkFemale() }
-        }
-        binding.maleCheckbox.setOnClickListener {
-            binding.maleCheckbox.runIfChecked { viewModel.checkMale() }
-        }
+        binding.backButton?.click(navigator::back)
+        binding.femaleCheckbox.click { binding.femaleCheckbox.runIfChecked(viewModel::checkFemale) }
+        binding.maleCheckbox.click { binding.maleCheckbox.runIfChecked(viewModel::checkMale) }
 
         binding.registerButton.setOnClickListener {
             binding.registerButton.disable()
-            viewModel.register(binding.femaleCheckbox.isChecked, binding.nameEdit.text.toString(),
-                binding.bioEdit.text.toString())
+            viewModel.register(RegisterOptionsUi(binding.femaleCheckbox.isChecked,
+                binding.nameEdit.str(), binding.bioEdit.str()))
         }
 
         viewModel.init()

@@ -3,6 +3,7 @@ package ru.freeit.walkingtogether.presentation.screens.register
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.AvatarListItemBinding
 
 class AvatarAdapter(
@@ -13,10 +14,8 @@ class AvatarAdapter(
     class AvatarViewHolder(private val binding: AvatarListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(avatar: AvatarImage, listener: AvatarListItemListener) {
-            binding.avatarImage.setImageResource(avatar.drawable())
-            binding.avatarImage.setOnClickListener {
-                listener.onAvatar(avatar)
-            }
+            avatar.img(binding.avatarImage)
+            binding.avatarImage.click { listener.onAvatar(avatar) }
         }
 
         companion object {

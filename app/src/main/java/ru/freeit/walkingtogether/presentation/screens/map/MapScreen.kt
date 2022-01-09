@@ -1,5 +1,6 @@
 package ru.freeit.walkingtogether.presentation.screens.map
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,7 @@ open class MapScreen : Fragment() {
 
     private var mapView : MapView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = MapScreenBinding.inflate(inflater, container, false)
 
         this.mapView = binding.mapView
