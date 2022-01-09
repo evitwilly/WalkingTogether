@@ -31,20 +31,32 @@ class ProfileViewModel(private val appPrefs: AppSharedPreferences, private val d
         }
     }
 
+    fun removeAccount(isRemoving: Boolean) {
+        if (isRemoving) {
+            logout()
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    database.remove(user.value!!.toFirebase())
+                }
+                loginState.value = LoginState.None
+            }
+        }
+    }
+
     fun selectAvatar(id: Int) {
         // TODO don't forget about this method
         val newAvatar = images.drawableBy(id)
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    user?.value?.toFirebase()?.copy(avatarId = newAvatar.id())
+                    user.value?.toFirebase()?.copy(avatarId = newAvatar.id())
                         ?.let { firebaseUser ->
                             firebaseUser.save(appPrefs)
                             database.add(firebaseUser)
                         }
 
                 }
-                user.value = user?.value?.copy(avatar = newAvatar)
+                user.value = user.value?.copy(avatar = newAvatar)
             } catch (someException: Exception) {
                 // TODO make errors handling
             }

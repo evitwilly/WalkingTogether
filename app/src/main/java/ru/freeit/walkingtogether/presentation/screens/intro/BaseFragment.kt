@@ -11,4 +11,5 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     protected val navigator by lazy {
         MyNavigator(requireActivity().supportFragmentManager)
     }
+    protected val fm by lazy { requireActivity().supportFragmentManager }
 }

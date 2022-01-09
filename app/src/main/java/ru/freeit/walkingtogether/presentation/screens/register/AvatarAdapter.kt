@@ -7,8 +7,8 @@ import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.AvatarListItemBinding
 
 class AvatarAdapter(
+    private val avatars: List<AvatarImage>,
     private val listener: AvatarListItemListener,
-    private val avatars: List<AvatarImage>
 ) : RecyclerView.Adapter<AvatarAdapter.AvatarViewHolder>() {
 
     class AvatarViewHolder(private val binding: AvatarListItemBinding) : RecyclerView.ViewHolder(binding.root) {

@@ -37,9 +37,9 @@ class RegisterViewModel(
     private val checkedAvatar = MutableLiveData<AvatarImage>()
 
     init {
-//        if (id.isBlank()) {
+        if (id.isBlank()) {
             registerState.value = RegisterState.GoogleError
-//        }
+        }
     }
 
     fun init() {

@@ -28,6 +28,16 @@ class MyFirebaseDatabase {
             .addOnFailureListener(continuation::resumeWithException)
     }
 
+    suspend fun remove(user: FirebaseUser) = suspendCoroutine<Unit> { continuation ->
+        database.getReference(users)
+            .child(user.id())
+            .removeValue()
+            .addOnSuccessListener {
+                continuation.resume(Unit)
+            }
+            .addOnFailureListener(continuation::resumeWithException)
+    }
+
     suspend fun user(id: String) : FirebaseUser = suspendCoroutine { continuation ->
         database.getReference(users).child(id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

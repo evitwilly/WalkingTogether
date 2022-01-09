@@ -29,12 +29,16 @@ class ProfileScreen : BaseFragment(R.layout.profile_screen) {
         }
 
         binding.avatarBox.setOnClickListener {
-            AvatarListDialog.newInstance(viewModel.isFemale()).show(parentFragmentManager)
+            AvatarListDialog.newInstance(viewModel.isFemale()).show(fm)
         }
 
-        AvatarListDialogListener(parentFragmentManager).listen(viewLifecycleOwner, viewModel::selectAvatar)
+        AvatarListDialogListener(fm).listen(viewLifecycleOwner, viewModel::selectAvatar)
+        AcceptDeletingAccountDialogListener(fm).listen(viewLifecycleOwner, viewModel::removeAccount)
 
         binding.logoutButton.click(viewModel::logout)
+        binding.deleteButton.click {
+            AcceptDeletingAccountDialog().show(fm)
+        }
 
         viewModel.observe(viewLifecycleOwner) { loginState ->
             if (loginState == LoginState.None) {

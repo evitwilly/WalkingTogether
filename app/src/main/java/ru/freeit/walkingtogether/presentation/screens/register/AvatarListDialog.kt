@@ -16,14 +16,6 @@ class AvatarListDialog : DialogFragment() {
         this.show(manager, "avatar_list_dialog")
     }
 
-    companion object {
-        private const val isFemaleKey = "is_female_key"
-
-        fun newInstance(isFemale: Boolean) = AvatarListDialog().apply {
-            arguments = bundleOf(isFemaleKey to isFemale)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,10 +28,10 @@ class AvatarListDialog : DialogFragment() {
         else
             AvatarImages().male()
 
-        binding.avatarList.adapter = AvatarAdapter({ avatar ->
+        binding.avatarList.adapter = AvatarAdapter(images) { avatar ->
             AvatarListDialogListener(parentFragmentManager).setResult(avatar.id())
             dismiss()
-        }, images)
+        }
 
         return binding.root
     }
@@ -49,5 +41,13 @@ class AvatarListDialog : DialogFragment() {
         val params = dialog?.window?.attributes
         params?.width = FrameLayout.LayoutParams.MATCH_PARENT
         dialog?.window?.attributes = params
+    }
+
+    companion object {
+        private const val isFemaleKey = "is_female_key"
+
+        fun newInstance(isFemale: Boolean) = AvatarListDialog().apply {
+            arguments = bundleOf(isFemaleKey to isFemale)
+        }
     }
 }
