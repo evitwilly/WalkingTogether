@@ -23,7 +23,12 @@ data class User(
     fun name(text: TextView) {
         text.text = name
     }
-    fun bio(text: AppCompatEditText) {
+
+    fun bioText(view: TextView) {
+        view.text = "Lorem ipsum amet dolor asdff salkkd woo lslsdkfkdl ddfkf llfdkl."
+    }
+
+    fun bioEdit(text: AppCompatEditText) {
         text.setText(bio)
     }
     fun checkFemale(radio: RadioButton) {

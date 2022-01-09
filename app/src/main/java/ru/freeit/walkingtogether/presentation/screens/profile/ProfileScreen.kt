@@ -1,35 +1,30 @@
 package ru.freeit.walkingtogether.presentation.screens.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.freeit.walkingtogether.core.App
+import ru.freeit.walkingtogether.R
+import ru.freeit.walkingtogether.core.delegates.viewBinding
+import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.ProfileScreenBinding
-import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
+import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarListDialog
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarListDialogListener
 
-class ProfileScreen : Fragment() {
+class ProfileScreen : BaseFragment(R.layout.profile_screen) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = ProfileScreenBinding.inflate(inflater, container, false)
+    private val binding by viewBinding(ProfileScreenBinding::bind)
 
-        val factory = (requireActivity().application as App).viewModelFactories.profile()
-        val viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val navigator = MyNavigator(parentFragmentManager)
+        val viewModel = ViewModelProvider(this, factories.profile()).get(ProfileViewModel::class.java)
 
         viewModel.observeUser(viewLifecycleOwner) { user ->
             user.apply {
                 img(binding.avatarImage)
                 name(binding.nameText)
+                bioText(binding.bioText)
             }
         }
 
@@ -39,9 +34,7 @@ class ProfileScreen : Fragment() {
 
         AvatarListDialogListener(parentFragmentManager).listen(viewLifecycleOwner, viewModel::selectAvatar)
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
-        }
+        binding.logoutButton.click(viewModel::logout)
 
         viewModel.observe(viewLifecycleOwner) { loginState ->
             if (loginState == LoginState.None) {
@@ -50,8 +43,7 @@ class ProfileScreen : Fragment() {
         }
 
         viewModel.init()
-
-        return binding.root
     }
+
 
 }

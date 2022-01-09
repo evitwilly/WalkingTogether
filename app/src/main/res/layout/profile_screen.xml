@@ -14,8 +14,6 @@
         android:padding="16dp"
         android:textSize="23sp"
         android:background="@color/purple_400"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -32,8 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_title"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp">
@@ -47,28 +43,40 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/name_text"
-            android:layout_weight="1"
-            app:layout_constraintStart_toEndOf="@id/avatar_box"
-            app:layout_constraintTop_toTopOf="@id/avatar_box"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@id/avatar_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name_text"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bio_text"
+                android:textColor="@color/white"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_button_ripple"
-            app:layout_constraintEnd_toEndOf="parent"
             android:padding="8dp"
             app:tint="@color/white"
             android:layout_gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="@id/avatar_box"
             android:layout_marginEnd="16dp"
             app:srcCompat="@drawable/ic_edit_24"/>
 
@@ -78,8 +86,6 @@
         android:id="@+id/avatar_change_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"
         app:iconPadding="16dp"
         android:insetTop="0dp"
@@ -87,15 +93,12 @@
         app:icon="@drawable/ic_image_24"
         android:text="@string/change_avatar"
         android:gravity="start|center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/avatar_box"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"
         app:iconPadding="16dp"
         android:insetTop="0dp"
@@ -103,8 +106,7 @@
         app:icon="@drawable/ic_logout_24"
         android:text="@string/logout"
         android:gravity="start|center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/avatar_box"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>
-    
+
 
 </LinearLayout>
