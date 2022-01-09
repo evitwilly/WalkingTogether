@@ -18,11 +18,6 @@ class MyNavigator(private val manager: FragmentManager) {
         replace(RegisterScreen.newInstance(id), "register")
     }
 
-//    fun map() {
-//        clear()
-//        replace(MapScreen())
-//    }
-
     fun main() {
         clear()
         replace(NavHostFragment())
@@ -31,11 +26,6 @@ class MyNavigator(private val manager: FragmentManager) {
     fun profile() {
         clear()
         replace(ProfileScreen())
-    }
-
-    fun walk() {
-        clear()
-        replace(WalkScreen())
     }
 
     fun intro() {

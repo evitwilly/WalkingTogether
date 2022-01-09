@@ -28,7 +28,7 @@ class ProfileScreen : BaseFragment(R.layout.profile_screen) {
             }
         }
 
-        binding.avatarChangeButton.setOnClickListener {
+        binding.avatarBox.setOnClickListener {
             AvatarListDialog.newInstance(viewModel.isFemale()).show(parentFragmentManager)
         }
 

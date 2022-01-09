@@ -82,18 +82,18 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/avatar_change_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:iconPadding="16dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:icon="@drawable/ic_image_24"
-        android:text="@string/change_avatar"
-        android:gravity="start|center_vertical"
-        style="@style/Widget.MaterialComponents.Button.TextButton"/>
+<!--    <Button-->
+<!--        android:id="@+id/avatar_change_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="16dp"-->
+<!--        app:iconPadding="16dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:icon="@drawable/ic_image_24"-->
+<!--        android:text="@string/change_avatar"-->
+<!--        android:gravity="start|center_vertical"-->
+<!--        style="@style/Widget.MaterialComponents.Button.TextButton"/>-->
 
     <Button
         android:id="@+id/logout_button"
