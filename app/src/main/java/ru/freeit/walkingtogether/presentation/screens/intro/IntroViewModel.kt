@@ -1,6 +1,7 @@
 package ru.freeit.walkingtogether.presentation.screens.intro
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -13,12 +14,10 @@ import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 
 class IntroViewModel(
-    ctx: Context,
+    private val googleSignClient: GoogleSignClient,
     private val appPrefs: AppSharedPreferences,
     private val database: MyFirebaseDatabase
-) : CoroutineViewModel() {
-
-    private val googleSignClient = GoogleSignClient(ctx)
+) : CoroutineViewModel(), SignInIntent {
 
     private val userState = MutableLiveData<UserState>()
 
@@ -41,12 +40,7 @@ class IntroViewModel(
             userState.value = if (user.isExists()) UserState.Success else UserState.None(id)
         }
     }
-//
-//    fun signOut() {
-//        googleSignClient.signOut()
-//        userState.value = null
-//    }
 
-    fun signInIntent() = googleSignClient.signInIntent()
+    override fun intent() = googleSignClient.signInIntent()
 
 }

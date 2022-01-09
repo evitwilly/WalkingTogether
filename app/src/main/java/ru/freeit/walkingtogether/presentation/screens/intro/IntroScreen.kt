@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.logoText
+import ru.freeit.walkingtogether.core.extensions.snackBar
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.presentation.disable
 import ru.freeit.walkingtogether.presentation.enable
@@ -20,18 +21,12 @@ class IntroScreen : BaseFragment(R.layout.intro_screen) {
 
         val viewModel = ViewModelProvider(this, factories.intro(requireActivity())).get(IntroViewModel::class.java)
 
-        val navigator = MyNavigator(parentFragmentManager)
-
         binding.logoText.logoText()
 
         viewModel.observeUserState(viewLifecycleOwner) { userState ->
             when (userState) {
-                is UserState.Success -> {
-                    navigator.map()
-                }
-                is UserState.None -> {
-                    navigator.register(userState.id())
-                }
+                is UserState.Success -> navigator.map()
+                is UserState.None -> navigator.register(userState.id())
             }
             binding.loginButton.enable()
         }
@@ -40,13 +35,13 @@ class IntroScreen : BaseFragment(R.layout.intro_screen) {
         googleAccountLogin.onSuccess(viewModel::check)
         googleAccountLogin.onCancel(binding.loginButton::enable)
         googleAccountLogin.onError {
-            Snackbar.make(binding.root, R.string.missing_internet, Snackbar.LENGTH_SHORT).show()
+            binding.root.snackBar(R.string.missing_internet)
             binding.loginButton.enable()
         }
 
         binding.loginButton.setOnClickListener {
             binding.loginButton.disable()
-            googleAccountLogin.login(viewModel.signInIntent())
+            googleAccountLogin.login(viewModel)
         }
     }
 

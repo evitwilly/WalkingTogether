@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.savedstate.SavedStateRegistryOwner
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
+import ru.freeit.walkingtogether.core.google.GoogleSignClient
 import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
 import ru.freeit.walkingtogether.presentation.MainViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModel
@@ -17,7 +18,7 @@ class ViewModelFactories(
     private val appPrefs: AppSharedPreferences
 ) {
     fun register(id: String, owner: SavedStateRegistryOwner, bundle: Bundle?) = RegisterViewModelFactory(id, database, appPrefs, owner, bundle)
-    fun intro(ctx: Context) = IntroViewModelFactory(ctx, appPrefs, database)
+    fun intro(ctx: Context) = IntroViewModelFactory(GoogleSignClient(ctx), appPrefs, database)
     fun main() = MainViewModelFactory(appPrefs)
     fun profile() = ProfileViewModelFactory(appPrefs, database)
 }

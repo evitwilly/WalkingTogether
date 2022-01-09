@@ -8,4 +8,7 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     protected val factories by lazy {
         (requireActivity().application as App).viewModelFactories
     }
+    protected val navigator by lazy {
+        MyNavigator(parentFragmentManager)
+    }
 }

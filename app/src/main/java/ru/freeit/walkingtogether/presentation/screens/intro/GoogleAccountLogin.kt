@@ -1,7 +1,6 @@
 package ru.freeit.walkingtogether.presentation.screens.intro
 
 import android.app.Activity
-import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -42,8 +41,8 @@ class GoogleAccountLogin(fragment: Fragment) {
         this.onCancel = cancel
     }
 
-    fun login(intent: Intent) {
-        googleSignInLauncher.launch(intent)
+    fun login(sign: SignInIntent) {
+        googleSignInLauncher.launch(sign.intent())
     }
 
 }

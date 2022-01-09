@@ -12,31 +12,26 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
+import ru.freeit.walkingtogether.core.delegates.viewBinding
+import ru.freeit.walkingtogether.core.extensions.runIfChecked
+import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
 import ru.freeit.walkingtogether.presentation.disable
 import ru.freeit.walkingtogether.presentation.enable
+import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
 import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
-class RegisterScreen : Fragment() {
+class RegisterScreen : BaseFragment(R.layout.register_screen) {
 
-    private fun AppCompatRadioButton.runIfChecked(onChecked: () -> Unit) {
-        if (isChecked) onChecked()
-    }
+    private val binding by viewBinding(RegisterScreenBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = RegisterScreenBinding.inflate(inflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val id = requireArguments().getString(googleAccountIdKey) ?: throw IllegalStateException("google id is empty!")
+        val id = arguments?.getString(googleAccountIdKey) ?: throw IllegalStateException("google id is empty!")
 
-        val app = requireActivity().application as App
-        val viewModelFactory = app.viewModelFactories.register(id, this, savedInstanceState)
-
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(RegisterViewModel::class.java)
-        val navigator = MyNavigator(parentFragmentManager)
+        val viewModel = ViewModelProvider(this, factories.register(id, this, savedInstanceState))
+            .get(RegisterViewModel::class.java)
 
         binding.avatarImage.setOnClickListener {
             AvatarListDialog.newInstance(binding.femaleCheckbox.isChecked)
@@ -88,12 +83,12 @@ class RegisterScreen : Fragment() {
         }
 
         viewModel.init()
-
-        return binding.root
     }
 
     companion object {
+
         private const val googleAccountIdKey = "google_account_id_key"
+
         fun newInstance(id: String) = RegisterScreen().apply {
             arguments = bundleOf(googleAccountIdKey to id)
         }

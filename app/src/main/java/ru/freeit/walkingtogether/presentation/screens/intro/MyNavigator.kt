@@ -10,13 +10,11 @@ import ru.freeit.walkingtogether.presentation.screens.register.RegisterScreen
 import ru.freeit.walkingtogether.presentation.screens.walk.WalkScreen
 
 class MyNavigator(private val manager: FragmentManager) {
+
     private val containerId = R.id.fragment_container
 
     fun register(id: String) {
-        manager.beginTransaction()
-            .replace(containerId, RegisterScreen.newInstance(id))
-            .addToBackStack(null)
-            .commit()
+        replace(RegisterScreen.newInstance(id), "register")
     }
 
     fun isBottomNavigation(fragment: Fragment) =
@@ -27,9 +25,6 @@ class MyNavigator(private val manager: FragmentManager) {
     fun map() {
         clear()
         replace(MapScreen())
-//        manager.beginTransaction()
-//            .replace(containerId, MapScreen())
-//            .commit()
     }
 
     fun profile() {
@@ -45,21 +40,16 @@ class MyNavigator(private val manager: FragmentManager) {
     fun intro() {
         clear()
         replace(IntroScreen())
-//        manager.beginTransaction()
-//            .replace(R.id.fragment_container, IntroScreen())
-//            .commit()
     }
 
+    private fun replace(fragment: Fragment, backStackName: String? = null) {
+        val transaction = manager.beginTransaction().replace(containerId, fragment)
 
-//        manager.beginTransaction()
-//            .replace(containerId, MainScreen())
-//            .commit()
+        if (backStackName != null) {
+            transaction.addToBackStack(backStackName)
+        }
 
-
-    private fun replace(fragment: Fragment) {
-        manager.beginTransaction()
-            .replace(containerId, fragment)
-            .commit()
+        transaction.commit()
     }
 
     fun back() = manager.popBackStack()
