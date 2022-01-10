@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back_24" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@string/change"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="top|start"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/white"
+            style="@style/My.TextInputLayout.FilledBox.Padding"
+            app:layout_constraintTop_toBottomOf="@id/gender">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/name"
+                android:gravity="top|start" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bio_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            app:counterEnabled="true"
+            app:counterMaxLength="75"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/white"
+            style="@style/My.TextInputLayout.FilledBox.Padding"
+            app:layout_constraintTop_toBottomOf="@id/name_box">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bio_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="4"
+                android:maxLines="4"
+                android:hint="@string/bio"
+                android:gravity="top|start"
+                android:maxLength="75" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</FrameLayout>

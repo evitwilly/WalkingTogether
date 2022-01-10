@@ -48,15 +48,18 @@ class ProfileViewModel(
         val newAvatar = images.drawableBy(id)
         val newUser = user.value?.copy(avatar = newAvatar)
 
+        val lastUser = user.value
+        user.value = newUser
+
         viewModelScope.launch {
             try {
                 newUser?.toFirebase()?.let { firebaseUser ->
                     userRepo.save(firebaseUser)
                     database.add(firebaseUser)
                 }
-                user.value = newUser
             } catch (someException: Exception) {
-                // TODO make errors handling
+                user.value = lastUser
+                // TODO handling error!
             }
         }
     }

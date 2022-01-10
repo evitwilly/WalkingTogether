@@ -26,7 +26,7 @@ data class UserDomain(
     }
 
     fun bioText(view: TextView) {
-        view.text = "Lorem ipsum amet dolor asdff salkkd woo lslsdkfkdl ddfkf llfdkl."
+        view.text = bio
     }
 
     fun bioEdit(text: AppCompatEditText) {

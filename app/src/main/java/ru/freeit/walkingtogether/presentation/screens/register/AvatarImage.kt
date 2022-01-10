@@ -1,6 +1,7 @@
 package ru.freeit.walkingtogether.presentation.screens.register
 
 import android.widget.ImageView
+import ru.freeit.walkingtogether.core.extensions.setImageResourceWithAnimating
 
 data class AvatarImage(
     private val id: Int,
@@ -8,6 +9,6 @@ data class AvatarImage(
 ) {
     fun id() = id
     fun img(view: ImageView) {
-        view.setImageResource(drawableId)
+        view.setImageResourceWithAnimating(drawableId)
     }
 }

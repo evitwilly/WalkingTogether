@@ -1,9 +1,12 @@
 package ru.freeit.walkingtogether.presentation.screens.register
 
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
@@ -11,6 +14,8 @@ import androidx.fragment.app.FragmentManager
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.core.delegates.viewBinding
+import ru.freeit.walkingtogether.core.extensions.dp
+import ru.freeit.walkingtogether.core.extensions.dpf
 import ru.freeit.walkingtogether.databinding.AvatarListDialogBinding
 
 class AvatarListDialog : DialogFragment(R.layout.avatar_list_dialog) {
@@ -23,6 +28,10 @@ class AvatarListDialog : DialogFragment(R.layout.avatar_list_dialog) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        dialog?.window?.setBackgroundDrawable(InsetDrawable(GradientDrawable().apply {
+            cornerRadius = 16.dpf(requireContext())
+        }, 16.dp(requireContext()), 0, 16.dp(requireContext()), 0))
 
         val avatarImages = (requireActivity().application as App).images
 

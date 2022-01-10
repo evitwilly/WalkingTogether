@@ -8,6 +8,7 @@ import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
 import ru.freeit.walkingtogether.presentation.MainViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModelFactory
+import ru.freeit.walkingtogether.presentation.screens.profile.NameViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.profile.ProfileViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 import ru.freeit.walkingtogether.presentation.screens.register.RegisterViewModelFactory
@@ -21,4 +22,5 @@ class ViewModelFactories(
     fun intro(ctx: Context) = IntroViewModelFactory(GoogleSignClient(ctx), userRepo, database)
     fun main() = MainViewModelFactory(userRepo)
     fun profile() = ProfileViewModelFactory(userRepo, images, database)
+    fun name() = NameViewModelFactory(userRepo, database)
 }

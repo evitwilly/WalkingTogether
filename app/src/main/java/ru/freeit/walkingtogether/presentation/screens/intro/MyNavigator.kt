@@ -6,6 +6,7 @@ import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.presentation.NavHostFragment
 
 import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
+import ru.freeit.walkingtogether.presentation.screens.profile.NameScreen
 import ru.freeit.walkingtogether.presentation.screens.profile.ProfileScreen
 import ru.freeit.walkingtogether.presentation.screens.register.RegisterScreen
 import ru.freeit.walkingtogether.presentation.screens.walk.WalkScreen
@@ -31,6 +32,10 @@ class MyNavigator(private val manager: FragmentManager) {
     fun intro() {
         clear()
         replace(IntroScreen())
+    }
+
+    fun nameEdit() {
+        replace(NameScreen(), "name_screen")
     }
 
     private fun replace(fragment: Fragment, backStackName: String? = null) {

@@ -6,7 +6,9 @@ import android.content.Context
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.animation.doOnEnd
@@ -27,6 +29,7 @@ fun View.snackBar(str: CharSequence, length: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, str, length).show()
 }
 
+fun Int.dp(ctx: Context) = (ctx.resources.displayMetrics.density * this).roundToInt()
 fun Int.dpf(ctx: Context) = ctx.resources.displayMetrics.density * this
 
 fun AppCompatRadioButton.runIfChecked(onChecked: () -> Unit) {
@@ -82,4 +85,13 @@ fun View.animateDecreasingHeight(delay: Long = 200L, onEnd: (animator: Animator)
         duration = delay
         start()
     }
+}
+
+fun ImageView.setImageResourceWithAnimating(@DrawableRes res: Int) {
+    animate().alpha(0f)
+        .withEndAction {
+            setImageResource(res)
+            animate().alpha(1f).setDuration(150L).start()
+        }
+        .setDuration(150L).start()
 }

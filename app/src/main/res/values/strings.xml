@@ -22,4 +22,6 @@
     <string name="do_you_want_to_delete_your_account">Вы действительно хотите удалить ваш аккаунт?</string>
     <string name="yes">ага</string>
     <string name="not">неа</string>
+    <string name="change_name_and_bio">Изменить имя или описание</string>
+    <string name="change">Изменить</string>
 </resources>

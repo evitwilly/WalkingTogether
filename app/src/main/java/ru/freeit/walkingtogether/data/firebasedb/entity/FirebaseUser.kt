@@ -19,6 +19,9 @@ data class FirebaseUser(
     fun toSnapshot() = mapOf(nameKey to name, bioKey to bio, isFemaleKey to isFemale, avatarIdKey to avatarId)
     fun toDomain(images: AvatarImages) = UserDomain(id, name, bio, isFemale, images.drawableBy(avatarId))
 
+    fun name() = name
+    fun desc() = bio
+
     suspend fun save(appPrefs: AppSharedPreferences) = appPrefs.run {
         saveBoolean(isFemaleKey, isFemale)
         saveString(nameKey, name)
