@@ -8,32 +8,30 @@ import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import ru.freeit.walkingtogether.R
+import ru.freeit.walkingtogether.core.App
+import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.databinding.AvatarListDialogBinding
 
-class AvatarListDialog : DialogFragment() {
+class AvatarListDialog : DialogFragment(R.layout.avatar_list_dialog) {
+
+    private val binding by viewBinding(AvatarListDialogBinding::bind)
 
     fun show(manager: FragmentManager) {
         this.show(manager, "avatar_list_dialog")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = AvatarListDialogBinding.inflate(inflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val images = if (requireArguments().getBoolean(isFemaleKey, true))
-            AvatarImages().female()
-        else
-            AvatarImages().male()
+        val avatarImages = (requireActivity().application as App).images
+
+        val images = if (requireArguments().getBoolean(isFemaleKey, true)) avatarImages.female() else avatarImages.male()
 
         binding.avatarList.adapter = AvatarAdapter(images) { avatar ->
             AvatarListDialogListener(parentFragmentManager).setResult(avatar.id())
             dismiss()
         }
-
-        return binding.root
     }
 
     override fun onResume() {
@@ -50,4 +48,5 @@ class AvatarListDialog : DialogFragment() {
             arguments = bundleOf(isFemaleKey to isFemale)
         }
     }
+
 }

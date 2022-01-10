@@ -3,11 +3,16 @@ package ru.freeit.walkingtogether.presentation.screens.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
-import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 
-class ProfileViewModelFactory(private val appPrefs: AppSharedPreferences, private val database: MyFirebaseDatabase) :
-    ViewModelProvider.Factory {
+class ProfileViewModelFactory(
+    private val userRepo: LocalUserRepository,
+    private val images: AvatarImages,
+    private val database: UserFirebaseDatabase
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ProfileViewModel(appPrefs, database) as T
+        return ProfileViewModel(userRepo, images, database) as T
     }
 }

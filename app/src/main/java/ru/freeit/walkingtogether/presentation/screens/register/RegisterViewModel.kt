@@ -9,30 +9,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
-import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
-import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
-
-class RegisterOptionsUi(
-    private val isFemale: Boolean,
-    private val name: String,
-    private val bio: String
-) {
-
-    fun emptyName() = name.isBlank()
-    fun emptyBio() = bio.isBlank()
-    fun firebaseUser(id: String, avatarId: Int) = FirebaseUser(id, name, bio, isFemale, avatarId)
-}
+import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
 
 class RegisterViewModel(
     private val id: String,
     private val savedState: SavedStateHandle,
-    private val appPrefs: AppSharedPreferences,
-    private val database: MyFirebaseDatabase
+    private val userRepo: LocalUserRepository,
+    private val images: AvatarImages,
+    private val database: UserFirebaseDatabase
 ) : CoroutineViewModel() {
 
     private val avatarIdKey = "avatar_id"
 
-    private val images = AvatarImages()
     private val registerState = MutableLiveData<RegisterState>()
     private val checkedAvatar = MutableLiveData<AvatarImage>()
 
@@ -90,11 +79,11 @@ class RegisterViewModel(
         viewModelScope.launch {
             try {
                 registerState.value = RegisterState.Loading
-                withContext(Dispatchers.IO) {
-                    val user = reg.firebaseUser(id, avatar.id())
-                    user.save(appPrefs)
-                    database.add(user)
-                }
+
+                val user = reg.firebaseUser(id, avatar.id())
+                userRepo.save(user)
+                database.add(user)
+
                 registerState.value = RegisterState.Success
             } catch (exc: Exception) {
                 registerState.value = RegisterState.Failure

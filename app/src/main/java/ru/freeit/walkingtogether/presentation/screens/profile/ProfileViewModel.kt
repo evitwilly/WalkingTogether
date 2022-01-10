@@ -6,27 +6,30 @@ import androidx.lifecycle.Observer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
-import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
-import ru.freeit.walkingtogether.domain.entity.User
+import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.domain.entity.UserDomain
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 
-class ProfileViewModel(private val appPrefs: AppSharedPreferences, private val database: MyFirebaseDatabase) : CoroutineViewModel() {
 
-    private val images = AvatarImages()
-    private val user = MutableLiveData<User>()
+class ProfileViewModel(
+    private val userRepo: LocalUserRepository,
+    private val images: AvatarImages,
+    private val database: UserFirebaseDatabase
+) : CoroutineViewModel() {
+
+    private val user = MutableLiveData<UserDomain>()
 
     private val loginState = MutableLiveData<LoginState>(LoginState.Logged)
 
     fun observe(owner: LifecycleOwner, observer: Observer<LoginState>) = loginState.observe(owner, observer)
+    fun observeUser(owner: LifecycleOwner, observer: Observer<UserDomain>) = user.observe(owner, observer)
 
     fun logout() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                FirebaseUser.logout(appPrefs)
-            }
+            userRepo.remove()
             loginState.value = LoginState.None
         }
     }
@@ -35,42 +38,35 @@ class ProfileViewModel(private val appPrefs: AppSharedPreferences, private val d
         if (isRemoving) {
             logout()
             viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    database.remove(user.value!!.toFirebase())
-                }
+                database.remove(user.value!!.toFirebase())
                 loginState.value = LoginState.None
             }
         }
     }
 
     fun selectAvatar(id: Int) {
-        // TODO don't forget about this method
         val newAvatar = images.drawableBy(id)
+        val newUser = user.value?.copy(avatar = newAvatar)
+
         viewModelScope.launch {
             try {
-                withContext(Dispatchers.IO) {
-                    user.value?.toFirebase()?.copy(avatarId = newAvatar.id())
-                        ?.let { firebaseUser ->
-                            firebaseUser.save(appPrefs)
-                            database.add(firebaseUser)
-                        }
-
+                newUser?.toFirebase()?.let { firebaseUser ->
+                    userRepo.save(firebaseUser)
+                    database.add(firebaseUser)
                 }
-                user.value = user.value?.copy(avatar = newAvatar)
+                user.value = newUser
             } catch (someException: Exception) {
                 // TODO make errors handling
             }
         }
     }
 
-    fun observeUser(owner: LifecycleOwner, observer: Observer<User>) = user.observe(owner, observer)
-
     fun isFemale() = user.value?.isFemale() ?: true
 
     fun init() {
         viewModelScope.launch {
-            val firebaseUser = FirebaseUser.restore(appPrefs)
-            user.value = firebaseUser.toDomain(images)
+            user.value = userRepo.read().toDomain(images)
         }
     }
+
 }

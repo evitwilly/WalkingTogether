@@ -2,7 +2,7 @@ package ru.freeit.walkingtogether.data.firebasedb.entity
 
 import com.google.firebase.database.DataSnapshot
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
-import ru.freeit.walkingtogether.domain.entity.User
+import ru.freeit.walkingtogether.domain.entity.UserDomain
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 
 data class FirebaseUser(
@@ -16,22 +16,16 @@ data class FirebaseUser(
     fun isExists() = id.isNotBlank()
     fun id() = id
 
-    fun encode() = mapOf(
-        nameKey to name,
-        bioKey to bio,
-        isFemaleKey to isFemale,
-        avatarIdKey to avatarId
-    )
+    fun toSnapshot() = mapOf(nameKey to name, bioKey to bio, isFemaleKey to isFemale, avatarIdKey to avatarId)
+    fun toDomain(images: AvatarImages) = UserDomain(id, name, bio, isFemale, images.drawableBy(avatarId))
 
-    fun toDomain(images: AvatarImages) = User(id, name, bio, isFemale, images.drawableBy(avatarId))
-
-    suspend fun save(appPrefs: AppSharedPreferences) {
-        appPrefs.saveBoolean(isFemaleKey, isFemale)
-        appPrefs.saveString(nameKey, name)
-        appPrefs.saveString(bioKey, bio)
-        appPrefs.saveString(idKey, id)
-        appPrefs.saveInt(avatarIdKey, avatarId)
-        appPrefs.commit()
+    suspend fun save(appPrefs: AppSharedPreferences) = appPrefs.run {
+        saveBoolean(isFemaleKey, isFemale)
+        saveString(nameKey, name)
+        saveString(bioKey, bio)
+        saveString(idKey, id)
+        saveInt(avatarIdKey, avatarId)
+        commit()
     }
 
     companion object {
@@ -43,22 +37,13 @@ data class FirebaseUser(
 
         fun empty() = FirebaseUser("")
 
-        suspend fun logout(appPrefs: AppSharedPreferences) {
-            appPrefs.saveBoolean(isFemaleKey, true)
-            appPrefs.saveString(nameKey, "")
-            appPrefs.saveString(bioKey, "")
-            appPrefs.saveString(idKey, "")
-            appPrefs.saveInt(avatarIdKey, -1)
-            appPrefs.commit()
-        }
-
-        fun restore(appPrefs: AppSharedPreferences) = FirebaseUser(
-            appPrefs.str(idKey, ""),
-            appPrefs.str(nameKey, ""),
-            appPrefs.str(bioKey, ""),
-            appPrefs.bool(isFemaleKey, true),
-            appPrefs.int(avatarIdKey, -1)
-        )
+        fun fromPrefs(appPrefs: AppSharedPreferences) = appPrefs.run { FirebaseUser(
+            str(idKey, ""),
+            str(nameKey, ""),
+            str(bioKey, ""),
+            bool(isFemaleKey, true),
+            int(avatarIdKey, -1)
+        ) }
 
         fun fromSnapshot(id: String, data: DataSnapshot) : FirebaseUser {
             return FirebaseUser(
@@ -69,5 +54,6 @@ data class FirebaseUser(
                 (data.child(avatarIdKey).value as Long).toInt()
             )
         }
+
     }
 }

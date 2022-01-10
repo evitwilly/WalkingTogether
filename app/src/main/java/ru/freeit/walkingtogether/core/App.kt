@@ -6,7 +6,10 @@ import androidx.multidex.MultiDex
 import com.google.firebase.FirebaseApp
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.core.viewmodel.ViewModelFactories
-import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.FirebaseCoreDatabase
+import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
 
 class App : Application() {
 
@@ -20,9 +23,13 @@ class App : Application() {
         MultiDex.install(this)
     }
 
-    private val firebaseDatabase by lazy { MyFirebaseDatabase() }
-    val appPrefs by lazy { AppSharedPreferences.Base(this) }
+    private val coreDatabase by lazy { FirebaseCoreDatabase.Base() }
+    private val userDatabase by lazy { UserFirebaseDatabase.Base(coreDatabase) }
 
-    val viewModelFactories by lazy { ViewModelFactories(firebaseDatabase, appPrefs) }
+    private val appPrefs by lazy { AppSharedPreferences.Base(this) }
+    private val userRepo by lazy { LocalUserRepository.Base(appPrefs) }
+    val images by lazy { AvatarImages.Base() }
+
+    val viewModelFactories by lazy { ViewModelFactories(userDatabase, userRepo, images) }
 
 }

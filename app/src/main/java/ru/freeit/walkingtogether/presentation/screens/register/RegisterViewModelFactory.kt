@@ -6,15 +6,17 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
-import ru.freeit.walkingtogether.data.firebasedb.MyFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
+import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
 
 class RegisterViewModelFactory(
     private val id: String,
-    private val database: MyFirebaseDatabase,
-    private val appPrefs: AppSharedPreferences,
+    private val database: UserFirebaseDatabase,
+    private val userRepo: LocalUserRepository,
+    private val images: AvatarImages,
     owner: SavedStateRegistryOwner,
     bundle: Bundle?
 ) : AbstractSavedStateViewModelFactory(owner, bundle) {
     override fun <T : ViewModel?> create(key: String, modelClass: Class<T>, handle: SavedStateHandle) =
-        RegisterViewModel(id, handle, appPrefs, database) as T
+        RegisterViewModel(id, handle, userRepo, images, database) as T
 }

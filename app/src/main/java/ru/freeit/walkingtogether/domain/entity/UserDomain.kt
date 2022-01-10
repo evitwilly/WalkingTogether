@@ -4,11 +4,12 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
+import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 
 import ru.freeit.walkingtogether.presentation.screens.register.AvatarImage
 
-data class User(
+data class UserDomain(
     private val id: String,
     private val name: String = "",
     private val bio: String = "",
@@ -31,8 +32,14 @@ data class User(
     fun bioEdit(text: AppCompatEditText) {
         text.setText(bio)
     }
+
     fun checkFemale(radio: RadioButton) {
         radio.isSelected = isFemale
     }
+
     fun toFirebase() = FirebaseUser(id, name, bio, isFemale, avatar.id())
+
+
+
+
 }
