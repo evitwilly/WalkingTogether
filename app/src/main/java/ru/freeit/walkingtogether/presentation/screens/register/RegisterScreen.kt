@@ -1,23 +1,14 @@
 package ru.freeit.walkingtogether.presentation.screens.register
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
-import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.*
-import ru.freeit.walkingtogether.databinding.IntroScreenBinding
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
 import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
-import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
 
 class RegisterScreen : BaseFragment(R.layout.register_screen) {
 
@@ -58,6 +49,11 @@ class RegisterScreen : BaseFragment(R.layout.register_screen) {
             }
             binding.registerButton.enable()
         }
+
+
+
+        val registerViewAnimating = RegisterViewAnimating(binding.avatarBox, binding.gender, binding.backButton!!)
+        onKeyboardVisibility(registerViewAnimating::animate)
 
         binding.backButton?.click(navigator::back)
         binding.femaleCheckbox.click { binding.femaleCheckbox.runIfChecked(viewModel::checkFemale) }
