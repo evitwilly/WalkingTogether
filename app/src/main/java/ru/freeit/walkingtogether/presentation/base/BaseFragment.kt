@@ -1,6 +1,5 @@
-package ru.freeit.walkingtogether.presentation.screens.intro
+package ru.freeit.walkingtogether.presentation.base
 
-import android.R
 import android.graphics.Rect
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
@@ -8,11 +7,7 @@ import ru.freeit.walkingtogether.core.App
 import android.util.TypedValue
 
 import android.os.Build
-import android.util.Log
 
-import android.view.ViewTreeObserver
-
-import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 
 

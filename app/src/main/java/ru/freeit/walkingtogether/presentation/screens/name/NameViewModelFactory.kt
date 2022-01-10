@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.profile
+package ru.freeit.walkingtogether.presentation.screens.name
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,8 +1,7 @@
-package ru.freeit.walkingtogether.presentation
+package ru.freeit.walkingtogether.presentation.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding

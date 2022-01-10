@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.screens.register.anim
 
 import android.util.Log
 import android.view.View

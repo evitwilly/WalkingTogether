@@ -5,9 +5,9 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 
 class RegisterViewModelFactory(
     private val id: String,

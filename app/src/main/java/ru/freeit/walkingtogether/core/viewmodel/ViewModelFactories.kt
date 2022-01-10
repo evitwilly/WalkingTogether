@@ -8,9 +8,9 @@ import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
 import ru.freeit.walkingtogether.presentation.MainViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.intro.IntroViewModelFactory
-import ru.freeit.walkingtogether.presentation.screens.profile.NameViewModelFactory
+import ru.freeit.walkingtogether.presentation.screens.name.NameViewModelFactory
 import ru.freeit.walkingtogether.presentation.screens.profile.ProfileViewModelFactory
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 import ru.freeit.walkingtogether.presentation.screens.register.RegisterViewModelFactory
 
 class ViewModelFactories(

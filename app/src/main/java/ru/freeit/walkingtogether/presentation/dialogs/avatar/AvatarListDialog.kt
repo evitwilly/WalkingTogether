@@ -1,12 +1,9 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.dialogs.avatar
 
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment

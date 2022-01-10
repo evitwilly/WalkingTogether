@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.profile
+package ru.freeit.walkingtogether.presentation.screens.profile.dialogs
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager

@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.profile
+package ru.freeit.walkingtogether.presentation.screens.profile.dialogs
 
 import android.os.Bundle
 import android.view.View

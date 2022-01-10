@@ -2,12 +2,10 @@ package ru.freeit.walkingtogether.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.App
 import ru.freeit.walkingtogether.databinding.ActivityMainBinding
-import ru.freeit.walkingtogether.presentation.screens.intro.MyNavigator
+import ru.freeit.walkingtogether.presentation.base.MyNavigator
 
 class MainActivity : AppCompatActivity() {
 

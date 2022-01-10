@@ -3,7 +3,6 @@ package ru.freeit.walkingtogether.presentation.screens.intro
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.disable
@@ -11,6 +10,9 @@ import ru.freeit.walkingtogether.core.extensions.enable
 import ru.freeit.walkingtogether.core.extensions.logoText
 import ru.freeit.walkingtogether.core.extensions.snackBar
 import ru.freeit.walkingtogether.databinding.IntroScreenBinding
+import ru.freeit.walkingtogether.presentation.base.BaseFragment
+import ru.freeit.walkingtogether.presentation.base.google.GoogleAccountLogin
+import ru.freeit.walkingtogether.presentation.screens.intro.ui.UserState
 
 class IntroScreen : BaseFragment(R.layout.intro_screen) {
 

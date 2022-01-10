@@ -4,10 +4,9 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
-import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImage
+import ru.freeit.walkingtogether.presentation.base.AvatarImage
 
 data class UserDomain(
     private val id: String,

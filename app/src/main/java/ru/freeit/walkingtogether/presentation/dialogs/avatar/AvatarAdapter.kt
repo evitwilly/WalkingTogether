@@ -1,10 +1,11 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.dialogs.avatar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.AvatarListItemBinding
+import ru.freeit.walkingtogether.presentation.base.AvatarImage
 
 class AvatarAdapter(
     private val avatars: List<AvatarImage>,
@@ -24,7 +25,8 @@ class AvatarAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AvatarViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        AvatarViewHolder.from(parent)
     override fun onBindViewHolder(holder: AvatarViewHolder, position: Int) = holder.bind(avatars[position], listener)
     override fun getItemCount() = avatars.size
 }

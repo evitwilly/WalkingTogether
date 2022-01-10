@@ -3,7 +3,7 @@ package ru.freeit.walkingtogether.data.firebasedb.entity
 import com.google.firebase.database.DataSnapshot
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.domain.entity.UserDomain
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 
 data class FirebaseUser(
     private val id: String,

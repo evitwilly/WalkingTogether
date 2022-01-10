@@ -9,7 +9,7 @@ import ru.freeit.walkingtogether.core.viewmodel.ViewModelFactories
 import ru.freeit.walkingtogether.data.firebasedb.FirebaseCoreDatabase
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 
 class App : Application() {
 

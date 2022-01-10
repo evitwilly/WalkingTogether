@@ -1,15 +1,13 @@
-package ru.freeit.walkingtogether.presentation.screens.intro
+package ru.freeit.walkingtogether.presentation.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import ru.freeit.walkingtogether.R
-import ru.freeit.walkingtogether.presentation.NavHostFragment
+import ru.freeit.walkingtogether.presentation.screens.intro.IntroScreen
 
-import ru.freeit.walkingtogether.presentation.screens.map.MapScreen
-import ru.freeit.walkingtogether.presentation.screens.profile.NameScreen
+import ru.freeit.walkingtogether.presentation.screens.name.NameScreen
 import ru.freeit.walkingtogether.presentation.screens.profile.ProfileScreen
 import ru.freeit.walkingtogether.presentation.screens.register.RegisterScreen
-import ru.freeit.walkingtogether.presentation.screens.walk.WalkScreen
 
 class MyNavigator(private val manager: FragmentManager) {
 

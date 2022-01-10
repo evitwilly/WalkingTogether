@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.profile
+package ru.freeit.walkingtogether.presentation.screens.name
 
 import android.os.Bundle
 import android.view.Menu
@@ -14,7 +14,8 @@ import ru.freeit.walkingtogether.core.extensions.gone
 import ru.freeit.walkingtogether.core.extensions.str
 import ru.freeit.walkingtogether.core.extensions.visible
 import ru.freeit.walkingtogether.databinding.NameScreenBinding
-import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
+import ru.freeit.walkingtogether.presentation.base.BaseFragment
+import ru.freeit.walkingtogether.presentation.screens.name.ui.NameEditState
 
 class NameScreen : BaseFragment(R.layout.name_screen) {
 

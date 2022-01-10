@@ -4,13 +4,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.presentation.base.AvatarImage
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
+import ru.freeit.walkingtogether.presentation.screens.register.ui.RegisterOptionsUi
+import ru.freeit.walkingtogether.presentation.screens.register.ui.RegisterState
 
 class RegisterViewModel(
     private val id: String,

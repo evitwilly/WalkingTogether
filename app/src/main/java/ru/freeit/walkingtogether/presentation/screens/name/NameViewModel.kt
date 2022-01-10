@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.profile
+package ru.freeit.walkingtogether.presentation.screens.name
 
 import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
+import ru.freeit.walkingtogether.presentation.screens.name.ui.NameEditState
 
 class NameViewModel(
     private val userRepo: LocalUserRepository,

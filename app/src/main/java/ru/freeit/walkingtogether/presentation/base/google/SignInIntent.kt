@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.intro
+package ru.freeit.walkingtogether.presentation.base.google
 
 import android.content.Intent
 

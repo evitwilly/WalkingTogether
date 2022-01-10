@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.screens.register.ui
 
 sealed class RegisterState {
     object NameEmpty : RegisterState()

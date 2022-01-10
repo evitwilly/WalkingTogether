@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.base
 
 import android.widget.ImageView
 import ru.freeit.walkingtogether.core.extensions.setImageResourceWithAnimating

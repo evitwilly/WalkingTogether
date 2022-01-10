@@ -2,10 +2,9 @@ package ru.freeit.walkingtogether.presentation.screens.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.freeit.walkingtogether.core.data.AppSharedPreferences
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 
 class ProfileViewModelFactory(
     private val userRepo: LocalUserRepository,

@@ -1,4 +1,4 @@
-package ru.freeit.walkingtogether.presentation.screens.register
+package ru.freeit.walkingtogether.presentation.screens.register.ui
 
 import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 

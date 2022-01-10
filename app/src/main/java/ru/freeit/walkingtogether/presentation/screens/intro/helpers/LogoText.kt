@@ -1,11 +1,7 @@
-package ru.freeit.walkingtogether.presentation.screens.intro
+package ru.freeit.walkingtogether.presentation.screens.intro.helpers
 
 import android.content.Context
-import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import androidx.core.content.ContextCompat
 import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.extensions.color
 import ru.freeit.walkingtogether.core.extensions.fontSizeExclusive

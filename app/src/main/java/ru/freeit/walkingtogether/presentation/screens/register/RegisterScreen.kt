@@ -8,7 +8,12 @@ import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.*
 import ru.freeit.walkingtogether.databinding.RegisterScreenBinding
-import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
+import ru.freeit.walkingtogether.presentation.base.BaseFragment
+import ru.freeit.walkingtogether.presentation.screens.register.anim.RegisterViewAnimating
+import ru.freeit.walkingtogether.presentation.dialogs.avatar.AvatarListDialog
+import ru.freeit.walkingtogether.presentation.dialogs.avatar.AvatarListDialogListener
+import ru.freeit.walkingtogether.presentation.screens.register.ui.RegisterOptionsUi
+import ru.freeit.walkingtogether.presentation.screens.register.ui.RegisterState
 
 class RegisterScreen : BaseFragment(R.layout.register_screen) {
 
@@ -61,8 +66,10 @@ class RegisterScreen : BaseFragment(R.layout.register_screen) {
 
         binding.registerButton.setOnClickListener {
             binding.registerButton.disable()
-            viewModel.register(RegisterOptionsUi(binding.femaleCheckbox.isChecked,
-                binding.nameEdit.str(), binding.bioEdit.str()))
+            viewModel.register(
+                RegisterOptionsUi(binding.femaleCheckbox.isChecked,
+                binding.nameEdit.str(), binding.bioEdit.str())
+            )
         }
 
         viewModel.init()

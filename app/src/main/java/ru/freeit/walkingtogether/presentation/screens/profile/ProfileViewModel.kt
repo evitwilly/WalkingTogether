@@ -3,15 +3,13 @@ package ru.freeit.walkingtogether.presentation.screens.profile
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.freeit.walkingtogether.core.viewmodel.CoroutineViewModel
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
-import ru.freeit.walkingtogether.data.firebasedb.entity.FirebaseUser
 import ru.freeit.walkingtogether.data.firebasedb.entity.LocalUserRepository
 import ru.freeit.walkingtogether.domain.entity.UserDomain
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarImages
+import ru.freeit.walkingtogether.presentation.screens.profile.ui.LoginState
+import ru.freeit.walkingtogether.presentation.base.AvatarImages
 
 
 class ProfileViewModel(

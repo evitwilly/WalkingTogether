@@ -7,9 +7,12 @@ import ru.freeit.walkingtogether.R
 import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.ProfileScreenBinding
-import ru.freeit.walkingtogether.presentation.screens.intro.BaseFragment
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarListDialog
-import ru.freeit.walkingtogether.presentation.screens.register.AvatarListDialogListener
+import ru.freeit.walkingtogether.presentation.base.BaseFragment
+import ru.freeit.walkingtogether.presentation.screens.profile.dialogs.AcceptDeletingAccountDialog
+import ru.freeit.walkingtogether.presentation.screens.profile.dialogs.AcceptDeletingAccountDialogListener
+import ru.freeit.walkingtogether.presentation.screens.profile.ui.LoginState
+import ru.freeit.walkingtogether.presentation.dialogs.avatar.AvatarListDialog
+import ru.freeit.walkingtogether.presentation.dialogs.avatar.AvatarListDialogListener
 
 class ProfileScreen : BaseFragment(R.layout.profile_screen) {
 
