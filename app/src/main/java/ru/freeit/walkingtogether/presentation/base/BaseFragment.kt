@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
 
+    protected val ctx by lazy {
+        requireContext()
+    }
+
     protected val factories by lazy {
         (requireActivity().application as App).viewModelFactories
     }

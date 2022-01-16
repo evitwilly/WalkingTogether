@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.google.firebase.FirebaseApp
 import ru.freeit.walkingtogether.core.data.AppSharedPreferences
+import ru.freeit.walkingtogether.core.location.LastKnownLocation
 import ru.freeit.walkingtogether.core.viewmodel.ViewModelFactories
 import ru.freeit.walkingtogether.data.firebasedb.FirebaseCoreDatabase
 import ru.freeit.walkingtogether.data.firebasedb.UserFirebaseDatabase
@@ -28,8 +29,10 @@ class App : Application() {
 
     private val appPrefs by lazy { AppSharedPreferences.Base(this) }
     private val userRepo by lazy { LocalUserRepository.Base(appPrefs) }
+    private val lastKnownLocation by lazy { LastKnownLocation(this) }
+
     val images by lazy { AvatarImages.Base() }
 
-    val viewModelFactories by lazy { ViewModelFactories(userDatabase, userRepo, images) }
+    val viewModelFactories by lazy { ViewModelFactories(userDatabase, userRepo, images, lastKnownLocation) }
 
 }

@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.MapView
+import ru.freeit.walkingtogether.presentation.base.BaseFragment
 
-abstract class AbstractMapScreen(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
+abstract class AbstractMapScreen(@LayoutRes layoutRes: Int) : BaseFragment(layoutRes) {
     protected var mapView : MapView? = null
 
     override fun onStart() {
