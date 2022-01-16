@@ -74,6 +74,7 @@ fun View.animateIncreasingHeight(toHeight: Int, delay: Long = 200L, onEnd: (anim
     }
 }
 
+
 fun View.animateDecreasingHeight(delay: Long = 200L, onEnd: (animator: Animator) -> Unit = {}) {
     ValueAnimator.ofInt(measuredHeight, 0).apply {
         addUpdateListener { animatedValue ->

@@ -9,15 +9,23 @@ import android.util.TypedValue
 import android.os.Build
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import androidx.appcompat.app.AppCompatActivity
 
 
 abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
+
     protected val factories by lazy {
         (requireActivity().application as App).viewModelFactories
     }
+
+    protected val activity by lazy {
+        requireActivity() as AppCompatActivity
+    }
+
     protected val navigator by lazy {
         MyNavigator(requireActivity().supportFragmentManager)
     }
+
     protected val fm by lazy { requireActivity().supportFragmentManager }
 
     protected fun onKeyboardVisibility(listener: (isVisible: Boolean) -> Unit) {

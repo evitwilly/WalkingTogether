@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             val isLogin = viewModel.isLogin()
-//            binding.bottomNavigation.isVisible = isLogin
             if (isLogin) {
                 navigator.main()
             } else {

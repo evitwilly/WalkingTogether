@@ -11,6 +11,7 @@ import ru.freeit.walkingtogether.core.extensions.click
 import ru.freeit.walkingtogether.databinding.AcceptDeletingAccountDialogBinding
 
 class AcceptDeletingAccountDialog : DialogFragment(R.layout.accept_deleting_account_dialog) {
+
     private val binding by viewBinding(AcceptDeletingAccountDialogBinding::bind)
 
     fun show(manager: FragmentManager) {

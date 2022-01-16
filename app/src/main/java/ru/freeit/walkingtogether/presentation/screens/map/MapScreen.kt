@@ -5,57 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.MapView
+import ru.freeit.walkingtogether.R
+import ru.freeit.walkingtogether.core.delegates.viewBinding
 import ru.freeit.walkingtogether.databinding.MapScreenBinding
 
-open class MapScreen : Fragment() {
+class MapScreen : AbstractMapScreen(R.layout.map_screen) {
 
-    private var mapView : MapView? = null
+    private val binding by viewBinding(MapScreenBinding::bind)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val binding = MapScreenBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         this.mapView = binding.mapView
-
         binding.mapView.onCreate(savedInstanceState)
 
-        return binding.root
-    }
 
-    override fun onStart() {
-        super.onStart()
-        mapView?.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView?.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView?.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView?.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView?.onDestroy()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapView?.onSaveInstanceState(outState)
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView?.onLowMemory()
     }
 
 }

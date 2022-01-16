@@ -25,9 +25,11 @@ class NameScreen : BaseFragment(R.layout.name_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        activity.setSupportActionBar(binding.toolbar)
+
         binding.toolbar.setNavigationOnClickListener { navigator.back() }
-        binding.toolbar.title = ""
+
+        activity.title = ""
 
         viewModel = ViewModelProvider(this, factories.name()).get(NameViewModel::class.java)
 
